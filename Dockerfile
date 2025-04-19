@@ -1,32 +1,43 @@
+# 🛰️ Base NodeJS Slim Image
 FROM node:18-slim
 
-# Install circom and snarkjs
+# 🛰️ Install Circom and SnarkJS for zkSNARKs
 RUN npm install -g circom snarkjs
 
-# Install build essentials, wget, python, venv
-RUN apt-get update && apt-get install -y wget gnupg2 build-essential python3 python3-venv python3-pip
+# 🛰️ Install System Tools and Python3 Environment
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    build-essential \
+    python3 \
+    python3-venv \
+    python3-pip \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
 
-# Create Python venv and install numpy inside it
+# 🛰️ Create Python venv and Install NumPy inside it (sovereign safe for Ubuntu 24.04)
 RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install --upgrade pip && \
     /opt/venv/bin/pip install numpy
 
-# Install yggdrasil manually
+# 🛰️ Install Yggdrasil v0.5.5 Manually
 RUN wget https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.5/yggdrasil-0.5.5-linux-amd64.tar.gz && \
     tar -xvzf yggdrasil-0.5.5-linux-amd64.tar.gz && \
-    cp yggdrasil /usr/local/bin/yggdrasil && chmod +x /usr/local/bin/yggdrasil
+    cp yggdrasil /usr/local/bin/yggdrasil && \
+    chmod +x /usr/local/bin/yggdrasil && \
+    rm -f yggdrasil-0.5.5-linux-amd64.tar.gz
 
-# Set environment variables to use local venv python
+# 🛰️ Set Environment to Use Local Sovereign Python venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Create app directory
+# 🛰️ Create Sovereign App Directory
 WORKDIR /opt/app
 
-# Copy all project files
+# 🛰️ Copy All Project Files
 COPY . .
 
-# Build zkSNARK proof environment
+# 🛰️ Prebuild zkSNARK Proof Environment
 RUN circom zk_trust.circom --r1cs --wasm --sym
 
-# Default command
+# 🛰️ Sovereign Boot Command
 CMD ["bash", "start.sh"]
