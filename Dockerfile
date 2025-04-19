@@ -47,8 +47,9 @@ WORKDIR /opt/app
 # 🛰️ Copy All Project Files
 COPY . .
 
-# 🛰️ Prebuild zkSNARK Proof Environment
-RUN circom zk_trust.circom --r1cs --wasm --sym
+# 🛰️ Pre‑build zkSNARK circuit (correct path)
+RUN circom ZK/zk_trust.circom --r1cs --wasm --sym
+
 
 # 🛰️ Sovereign Boot Command
 CMD ["bash", "start.sh"]
