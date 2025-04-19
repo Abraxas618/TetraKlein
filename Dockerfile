@@ -12,8 +12,8 @@ RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install numpy
 
 # Install yggdrasil manually
-RUN wget https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.4/yggdrasil-0.5.4-linux-amd64.tar.gz && \
-    tar -xvzf yggdrasil-0.5.4-linux-amd64.tar.gz && \
+RUN wget https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.5/yggdrasil-0.5.5-linux-amd64.tar.gz && \
+    tar -xvzf yggdrasil-0.5.5-linux-amd64.tar.gz && \
     cp yggdrasil /usr/local/bin/yggdrasil && chmod +x /usr/local/bin/yggdrasil
 
 # Set environment variables to use local venv python
