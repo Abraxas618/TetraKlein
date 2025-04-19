@@ -1,5 +1,7 @@
 pragma circom 2.0.0;
+
 include "poseidon.circom";
+
 
 template Main() {
     signal input user_entropy;
