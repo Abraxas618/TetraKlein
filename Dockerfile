@@ -1,3 +1,5 @@
+CMD bash -c "yggdrasil -useconffile /etc/yggdrasil/yggdrasil.conf & sleep 5 && bash run_zk_trust_proof.sh"
+
 # Use official lightweight node image
 FROM node:18-slim
 
