@@ -1,12 +1,12 @@
-# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-# ┃    TETRAKLEIN GENESIS • FINAL FUTURE‑PROOF DOCKERFILE ┃
-# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃  TetraKlein Genesis • FINAL FAIL‑SAFE DOCKERFILE    ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-######## 1️⃣ BASE IMAGE + CIRCOM / SNARKJS ################
+################ 1️⃣ BASE & TOOLING #####################
 FROM node:18-slim
-RUN npm install -g circom snarkjs
+RUN npm install -g circom snarkjs          # Circom 2 / SnarkJS
 
-######## 2️⃣ CORE TOOLS, GO 1.20.5, PYTHON VENV ##########
+# core utilities + dos2unix + Go & Python venv
 RUN apt-get update && apt-get install -y \
         wget git build-essential ca-certificates \
         python3 python3-venv python3-pip golang dos2unix \
@@ -21,28 +21,28 @@ RUN python3 -m venv /opt/venv \
  && /opt/venv/bin/pip install --upgrade pip numpy
 ENV PATH="/opt/venv/bin:${PATH}"
 
-######## 3️⃣ BUILD YGGDRASIL v0.5.5 FROM SOURCE ###########
+################ 2️⃣ BUILD YGGDRASIL ####################
 RUN git clone https://github.com/yggdrasil-network/yggdrasil-go.git /opt/yggdrasil \
- && cd /opt/yggdrasil \
- && git checkout v0.5.5 \
+ && cd /opt/yggdrasil && git checkout v0.5.5 \
  && go build -o yggdrasil ./cmd/yggdrasil \
  && install -m755 yggdrasil /usr/local/bin/ \
  && rm -rf /opt/yggdrasil
 
-######## 4️⃣ COPY PROJECT #################################
+################ 3️⃣ COPY PROJECT #######################
 WORKDIR /opt/app
 COPY . .
 
-######## 5️⃣ ZK PATCH & LINE‑ENDING CONVERSION ############
-#  • delete rogue “poom” line if present
-#  • convert CRLF → LF to avoid line‑merge parse errors
-#  • ensure compile.sh is executable
-RUN sed -i '/poom/d' ZK/zk_trust.circom \
- && dos2unix ZK/zk_trust.circom ZK/compile.sh \
- && chmod +x ZK/compile.sh
+################ 4️⃣ PATCH & CONVERT ####################
+# 1. convert CRLF to LF for both files
+# 2. remove any rogue “poom” line
+# 3. ensure compile.sh is executable
+RUN dos2unix ZK/zk_trust.circom ZK/compile.sh \
+ && sed -i '/poom/d' ZK/zk_trust.circom \
+ && chmod +x ZK/compile.sh \
+ && head -n 3 ZK/zk_trust.circom   # debug line (shows pragma+include)
 
-######## 6️⃣ RUN PROVEN ZK PIPELINE #######################
+################ 5️⃣ RUN PROVEN ZK PIPELINE #############
 RUN cd ZK && ./compile.sh
 
-######## 7️⃣ LAUNCH SOVEREIGN NODE ########################
+################ 6️⃣ LAUNCH NODE ########################
 CMD ["bash", "start.sh"]
