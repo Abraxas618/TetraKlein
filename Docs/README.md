@@ -1,7 +1,7 @@
-# 🛰️ TetraKlein: Sovereign Quantum-Resilient Infrastructure
+# 🚀 TetraKlein: Sovereign Quantum-Resilient Infrastructure
 
 **Codename:** TetraKlein Genesis  
-**Commander:** Michael Tass MacDonald (Abraxas618)  
+by Michael Tass MacDonald (Abraxas618)  
 **Certification Code:** Codex Sovereign Infrastructure Quantum-Resilient Mesh Genesis Certification — 001  
 
 ---
@@ -39,8 +39,8 @@ All decoy systems have been purged. Only verified operational payloads remain.
 1. Install [circom](https://docs.circom.io/getting-started/installation/) and [snarkjs](https://github.com/iden3/snarkjs).
 2. Clone this repository:
     ```bash
-    git clone https://github.com/Abraxas618/TetraKleinGenesis.git
-    cd TetraKleinGenesis
+    git clone https://github.com/Abraxas618/TetraKlein.git
+    cd TetraKlein
     ```
 3. To generate and verify a sovereign proof:
     ```bash
@@ -67,8 +67,7 @@ Proof system based on **Poseidon zk-SNARK hashing**, sovereign witness generatio
 
 ## Documentation
 
-- [Deployment Manifest](Deployment_Manifest.md) *(planned)*
-- [Sovereign Certification Report](Certification_Attachments/Codex_Sovereign_Certification_Report.md) *(planned)*
+- [Deployment Manifest](Deployment_Manifest.md) 
 
 ---
 
@@ -80,15 +79,6 @@ Proof system based on **Poseidon zk-SNARK hashing**, sovereign witness generatio
 - Poseidon hashing ensures quantum-resilient proof anchoring.
 - Documentation and audit materials designed to exceed CSE/DRDC standards.
 
----
-
-## Sovereignty Statement
-
-Sovereignty is not granted.  
-It is built.
-
-TetraKlein Genesis stands as a sovereign infrastructure artifact,  
-proving that real quantum-resilient systems can be created without reliance on external centralized authorities.
 
 ---
 
@@ -98,7 +88,17 @@ proving that real quantum-resilient systems can be created without reliance on e
 - **GitHub:** [Abraxas618](https://github.com/Abraxas618)
 - **ORCID:** [0009-0005-6468-7651](https://orcid.org/0009-0005-6468-7651)
 
-4fade536d6ade01a686fa27029dec880cbb1344d74e53ada30dd4e753b7bd177
- SHA-256 Cryptographic Hash: For TetraKlein-Genesis-RTH-MeshReady.tar.tar.gz https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4
- https://ipfs.io/ipfs/bafkreier2azof7dmq2zoa5uh3jwga6u2oekez63cyfi75lljme46ofkjbm OTS
 ---
+
+## Archive and Verification
+
+- **SHA-256 Cryptographic Hash:**  
+  `4fade536d6ade01a686fa27029dec880cbb1344d74e53ada30dd4e753b7bd177`
+
+- **Archive File:** `TetraKlein-Genesis-RTH-MeshReady.tar.gz` @IPFS Link 1
+
+- **IPFS Archive:**  
+  [IPFS Link 1](https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4)  
+
+- **OTS (OpenTimestamps) Blockchain Timestamp:** 
+ [IPFS Link 2](https://ipfs.io/ipfs/bafkreier2azof7dmq2zoa5uh3jwga6u2oekez63cyfi75lljme46ofkjbm)
