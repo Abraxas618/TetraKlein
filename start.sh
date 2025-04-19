@@ -2,7 +2,7 @@
 set -e
 
 echo "🛰️ Bootstrapping Sovereign Yggdrasil Mesh..."
-yggdrasil -useconffile /etc/yggdrasil/yggdrasil.conf &
+yggdrasil -useconffile /opt/app/Mesh/yggdrasil.conf &
 
 sleep 5
 
