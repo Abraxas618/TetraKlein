@@ -1,156 +1,174 @@
-# 🚁 TetraKlein Sovereign Node Deployment User Guide
-
-**Project:** TetraKlein Genesis
-**Creator:** Michael Tass MacDonald (Abraxas618)  
-**Codex Certification:** Sovereign Infrastructure Genesis — 001
+# 🚀 TetraKlein Sovereign Node Deployment: Full User Guide
 
 ---
 
-# Overview
+## 🌍 Overview
 
-This guide explains how to deploy the **TetraKlein Sovereign Quantum-Resilient Node** on **any OS**:
-- Ubuntu / Debian / Fedora / Arch / Kali Linux / any Linux distro
-- Windows (PowerShell and WSL)
-- macOS
+Welcome to the **TetraKlein Genesis** sovereign quantum-resilient node deployment guide.
+This guide explains step-by-step **how to download, verify, extract, and deploy** the TetraKlein Sovereign Node on:
 
-**IPFS Archive:**
-- **Name:** `bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4.gz`
-- **Link:** [https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4](https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4)
+- 🔧 **Ubuntu Linux**
+- 🔧 **Debian Linux**
+- 🔧 **Kali Linux**
+- 🔧 **Other Linux Distros**
+- 🔧 **Windows PowerShell** (with WSL/Native)
+- 🔧 **MacOS Terminal**
 
-**GitHub Repository:**
-- [https://github.com/Abraxas618/TetraKlein](https://github.com/Abraxas618/TetraKlein)
-
----
-
-# General Requirements
-
-- Docker OR Podman installed
-- IPFS client (optional for downloading via IPFS)
-- Python3 and npm (automatically handled inside container)
+**No matter your OS, this guide ensures you can deploy TetraKlein successfully.**
 
 ---
 
-# Deployment on Linux (Ubuntu, Debian, Fedora, Kali, Arch)
+## 🌐 Downloading TetraKlein Archive
 
-## 1. Install Docker
+### Download via IPFS
 
+Primary IPFS Archive:
+```
+https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4
+```
+
+You can manually download from browser or install **IPFS Desktop** / **command-line ipfs** client.
+
+Example IPFS CLI Download:
 ```bash
-# Ubuntu / Debian
-sudo apt update && sudo apt install docker.io -y
+ipfs get bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4 -o TetraKlein-Genesis-RTH-MeshReady.tar.gz
+```
 
-# Fedora
-sudo dnf install docker -y
+### Download via GitHub (Alternative)
+```bash
+git clone https://github.com/Abraxas618/TetraKlein.git
+```
 
-# Arch / Manjaro
-sudo pacman -S docker
+Note: **Official Archive Name Before Upload:**
+```
+TetraKlein-Genesis-RTH-MeshReady.tar.gz
+```
 
-# Start and enable Docker
+---
+
+## 🔒 Verify Archive Integrity
+
+SHA-256 checksum should match:
+```
+4fade536d6ade01a686fa27029dec880cbb1344d74e53ada30dd4e753b7bd177
+```
+
+#### Linux/macOS Terminal
+```bash
+sha256sum TetraKlein-Genesis-RTH-MeshReady.tar.gz
+```
+
+#### Windows PowerShell
+```powershell
+Get-FileHash TetraKlein-Genesis-RTH-MeshReady.tar.gz -Algorithm SHA256
+```
+
+**Match hashes before proceeding!**
+
+---
+
+## 🔢 Extract the Archive
+
+#### Linux/macOS Terminal
+```bash
+tar -xvzf TetraKlein-Genesis-RTH-MeshReady.tar.gz
+```
+
+#### Windows PowerShell (with 7zip or WSL)
+```powershell
+7z x TetraKlein-Genesis-RTH-MeshReady.tar.gz
+```
+_or if using WSL:_
+```bash
+tar -xvzf TetraKlein-Genesis-RTH-MeshReady.tar.gz
+```
+
+Result: You should now have a folder structure:
+```
+TetraKlein-main/
+├── Core/
+├── Mesh/
+├── ZK/
+├── start.sh
+├── Dockerfile
+└── run_zk_trust_proof.sh
+```
+
+---
+
+## 🎓 Install Required Software
+
+#### Ubuntu/Debian/Kali Linux
+```bash
+sudo apt update
+sudo apt install -y docker.io docker-compose python3 python3-pip npm nodejs build-essential wget
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
 
-## 2. Download the TetraKlein package
-
-Option 1 (IPFS):
+#### macOS (with Homebrew)
 ```bash
-ipfs get bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4 -o TetraKlein.tar.gz
+brew install docker npm python3
 ```
+(Ensure Docker Desktop is installed for macOS)
 
-Option 2 (GitHub Clone):
-```bash
-git clone https://github.com/Abraxas618/TetraKlein.git
-cd TetraKlein
-```
-
-## 3. Build and Launch
-
-```bash
-# If using IPFS archive
-tar -xvzf TetraKlein.tar.gz
-cd TetraKlein
-
-# Build container
-sudo docker build -t tetraklein-node .
-
-# Launch container
-sudo docker run --network=host tetraklein-node
-```
-
----
-
-# Deployment on Windows (PowerShell)
-
-## 1. Install Docker Desktop
-- Download and install: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
-- Enable WSL2 backend
-
-## 2. Download TetraKlein package
-
-Using PowerShell:
+#### Windows PowerShell (with WSL Ubuntu)
 ```powershell
-# GitHub Clone
-git clone https://github.com/Abraxas618/TetraKlein.git
-cd TetraKlein
-
-# (Optional) Or download from IPFS using Kubo/Helia clients
-```
-
-## 3. Build and Run
-
-```powershell
-# In PowerShell
-docker build -t tetraklein-node .
-docker run --network=host tetraklein-node
-```
-
-**Note:** Windows Docker Desktop simulates Linux networking; `--network=host` behaves differently. Consider using WSL2 Ubuntu Terminal for a true Linux-native mesh.
-
----
-
-# Deployment on macOS
-
-## 1. Install Docker
-
-```bash
-brew install --cask docker
-open /Applications/Docker.app
-```
-
-## 2. Download and Launch
-
-Same steps as Linux:
-```bash
-git clone https://github.com/Abraxas618/TetraKlein.git
-cd TetraKlein
-
-docker build -t tetraklein-node .
-docker run --network=host tetraklein-node
+wsl
+sudo apt update
+sudo apt install -y docker.io docker-compose python3 python3-pip npm nodejs build-essential wget
+sudo service docker start
 ```
 
 ---
 
-# Notes for Advanced Users
+## 🛠️ Building the TetraKlein Sovereign Container
 
-- You can modify `Mesh/yggdrasil.conf` to manually add bootstrap Peers.
-- Tun0 interface will be created when Yggdrasil mesh is active.
-- Full sovereignty is enabled by default: SessionFirewall active, Multicast disabled.
-- Docker container will automatically start Yggdrasil Mesh, then run zkSNARK Sovereign Proof cycle.
+From inside the extracted `TetraKlein-main/` directory:
+
+```bash
+sudo docker build -t tetraklein-genesis .
+```
+
+This will:
+- Install Circom and SnarkJS
+- Install Yggdrasil binary
+- Build zkSNARK circuits
+- Prepare Mesh encrypted networking layer
+
+✅ You will now have the `tetraklein-genesis` container ready.
 
 ---
 
-# Verification
+## 🔄 Running the Sovereign Genesis Node
 
-After launch, verify:
 ```bash
-# Check tun0 exists
-ip addr | grep tun0
-
-# Check Yggdrasil process running
-ps aux | grep yggdrasil
-
-# Proof system running
-ls proof.json public.json verification_key.json
+sudo docker run -it --network host tetraklein-genesis
 ```
-# For Questions / Mission Support
 
-- GitHub Issues: [https://github.com/Abraxas618/TetraKlein/issues](https://github.com/Abraxas618/TetraKlein/issues)
+This will automatically:
+- 📡 Bootstrap Yggdrasil Mesh Sovereign Node
+- 🧰 Generate zkSNARKs with Recursive Tesseract Hashing (RTH)
+- 🔢 Produce Proofs anchoring hyperdimensional ledgers
+
+✅ Your TetraKlein Sovereign Node is now live!
+
+---
+
+## 💡 Troubleshooting Tips
+
+| Problem | Solution |
+|:--|:--|
+| Docker build fails | Make sure system memory >4GB and disk space >5GB |
+| Yggdrasil won't start | Check if ports 54545 are open; check `Mesh/yggdrasil.conf` file |
+| Proof generation fails | Ensure Node.js, Circom, SnarkJS installed inside container |
+| WSL Docker issues (Windows) | Start WSL manually: `wsl --update`, `wsl` then `service docker start` |
+
+---
+
+## 💚 Support the Sovereign Mesh!
+
+- ⭐ GitHub: [https://github.com/Abraxas618/TetraKlein](https://github.com/Abraxas618/TetraKlein)
+- 📦 Archive: [IPFS Archive Link](https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4)
+
+Together we build a sovereign hyperdimensional future!
