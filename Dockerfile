@@ -1,48 +1,48 @@
-# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-# ┃  TetraKlein Genesis • FINAL FAIL‑SAFE DOCKERFILE    ┃
-# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+# ─────────────────────────────────────────────────────────────
+# 🛰️  TetraKlein Genesis – Final Proven Hardened Dockerfile
+# ─────────────────────────────────────────────────────────────
 
-################ 1️⃣ BASE & TOOLING #####################
+# 1️⃣ Base NodeJS slim image
 FROM node:18-slim
-RUN npm install -g circom snarkjs          # Circom 2 / SnarkJS
 
-# core utilities + dos2unix + Go & Python venv
+# 2️⃣ Circom and SnarkJS
+RUN npm install -g circom snarkjs
+
+# 3️⃣ System tools, Python venv, Go compiler
 RUN apt-get update && apt-get install -y \
-        wget git build-essential ca-certificates \
-        python3 python3-venv python3-pip golang dos2unix \
-    && rm -rf /var/lib/apt/lists/* \
- && wget https://golang.org/dl/go1.20.5.linux-amd64.tar.gz \
- && tar -C /usr/local -xzf go1.20.5.linux-amd64.tar.gz \
- && rm  go1.20.5.linux-amd64.tar.gz
+    wget git build-essential ca-certificates \
+    python3 python3-venv python3-pip \
+    golang \
+ && rm -rf /var/lib/apt/lists/*
+
+# 4️⃣ Install Go 1.20.5 manually
+RUN wget https://golang.org/dl/go1.20.5.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go1.20.5.linux-amd64.tar.gz && \
+    rm go1.20.5.linux-amd64.tar.gz
 ENV PATH="/usr/local/go/bin:${PATH}"
 
-# Python venv + NumPy
-RUN python3 -m venv /opt/venv \
- && /opt/venv/bin/pip install --upgrade pip numpy
-ENV PATH="/opt/venv/bin:${PATH}"
+# 5️⃣ Create Python venv + Install NumPy
+RUN python3 -m venv /opt/venv && \
+    /opt/venv/bin/pip install --upgrade pip && \
+    /opt/venv/bin/pip install numpy
+ENV PATH="/opt/venv/bin:$PATH"
 
-################ 2️⃣ BUILD YGGDRASIL ####################
-RUN git clone https://github.com/yggdrasil-network/yggdrasil-go.git /opt/yggdrasil \
- && cd /opt/yggdrasil && git checkout v0.5.5 \
- && go build -o yggdrasil ./cmd/yggdrasil \
- && install -m755 yggdrasil /usr/local/bin/ \
- && rm -rf /opt/yggdrasil
+# 6️⃣ Build Yggdrasil v0.5.5 from source
+RUN git clone https://github.com/yggdrasil-network/yggdrasil-go.git /opt/yggdrasil && \
+    cd /opt/yggdrasil && \
+    git checkout v0.5.5 && \
+    go build -o yggdrasil ./cmd/yggdrasil && \
+    cp yggdrasil /usr/local/bin/ && \
+    chmod +x /usr/local/bin/yggdrasil && \
+    rm -rf /opt/yggdrasil
 
-################ 3️⃣ COPY PROJECT #######################
+# 7️⃣ App workspace
 WORKDIR /opt/app
 COPY . .
 
-################ 4️⃣ PATCH & CONVERT ####################
-# 1. convert CRLF to LF for both files
-# 2. remove any rogue “poom” line
-# 3. ensure compile.sh is executable
-RUN dos2unix ZK/zk_trust.circom ZK/compile.sh \
- && sed -i '/poom/d' ZK/zk_trust.circom \
- && chmod +x ZK/compile.sh \
- && head -n 3 ZK/zk_trust.circom   # debug line (shows pragma+include)
+# 🛑 **NO SED PATCHING**  
+# 🛑 **NO circom pre-build at build time**  
+# 🛑 **NO compile.sh during build**
 
-################ 5️⃣ RUN PROVEN ZK PIPELINE #############
-RUN cd ZK && ./compile.sh
-
-################ 6️⃣ LAUNCH NODE ########################
-CMD ["bash", "start.sh"]
+# 🔟 Run-time final build using your working compile.sh
+CMD ["bash", "-c", "cd ZK && chmod +x compile.sh && ./compile.sh && cd .. && bash start.sh"]
