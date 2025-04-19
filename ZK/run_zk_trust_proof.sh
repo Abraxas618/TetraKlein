@@ -4,6 +4,7 @@ set -e
 # Configuration
 CIRCUIT_NAME="zk_trust"
 INPUT_JSON="input.json"
+RTH_OUTPUT="rth_output.bin"
 WITNESS_WTN="witness.wtns"
 POT_0000="pot12_0000.ptau"
 POT_FINAL="pot12_final.ptau"
@@ -12,6 +13,20 @@ ZKEY_FINAL="${CIRCUIT_NAME}_final.zkey"
 PROOF_JSON="proof.json"
 PUBLIC_JSON="public.json"
 VERIFICATION_KEY_JSON="verification_key.json"
+
+echo "🛰️ [0/9] Recursive Tesseract Hashing (RTH) Preprocessing"
+
+# Invoke your real RTH module to create hyperdimensional hash
+python3 -c "
+from Core.rth import recursive_tesseract_hash
+with open('${INPUT_JSON}', 'rb') as f:
+    seed = f.read()
+hashed = recursive_tesseract_hash(seed, depth=4)
+with open('${RTH_OUTPUT}', 'wb') as out:
+    out.write(hashed)
+"
+
+echo "✅ RTH Digest Generated: ${RTH_OUTPUT}"
 
 echo "🛰️ [1/9] Compile circuit"
 circom ${CIRCUIT_NAME}.circom --r1cs --wasm --sym
@@ -32,7 +47,7 @@ echo "🛰️ [6/9] Export verification key"
 snarkjs zkey export verificationkey ${ZKEY_FINAL} ${VERIFICATION_KEY_JSON}
 
 echo "🛰️ [7/9] Generate witness"
-node ${CIRCUIT_NAME}_js/generate_witness.js ${CIRCUIT_NAME}_js/${CIRCUIT_NAME}.wasm ${INPUT_JSON} ${WITNESS_WTN}
+node ${CIRCUIT_NAME}_js/generate_witness.js ${CIRCUIT_NAME}_js/${CIRCUIT_NAME}.wasm ${RTH_OUTPUT} ${WITNESS_WTN}
 
 echo "🛰️ [8/9] Generate proof"
 snarkjs groth16 prove ${ZKEY_FINAL} ${WITNESS_WTN} ${PROOF_JSON} ${PUBLIC_JSON}
@@ -40,4 +55,4 @@ snarkjs groth16 prove ${ZKEY_FINAL} ${WITNESS_WTN} ${PROOF_JSON} ${PUBLIC_JSON}
 echo "🛰️ [9/9] Verify proof"
 snarkjs groth16 verify ${VERIFICATION_KEY_JSON} ${PUBLIC_JSON} ${PROOF_JSON}
 
-echo "✅ Sovereign ZK-Proof Cycle Complete — Genesis Confirmed!"
+echo "✅ Sovereign ZK-Proof Cycle Complete — Genesis + RTH Confirmed!"
