@@ -48,7 +48,7 @@ WORKDIR /opt/app
 COPY . .
 
 # 🛰️ Pre‑build zkSNARK circuit (correct path)
-RUN circom ZK/zk_trust.circom --r1cs --wasm --sym
+RUN circom ZK/zk_trust.circom --r1cs --wasm --sym -I ZK/circomlib/circuits
 
 
 # 🛰️ Sovereign Boot Command
