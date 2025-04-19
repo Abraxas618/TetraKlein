@@ -5,7 +5,8 @@ FROM node:18-slim
 RUN npm install -g circom snarkjs
 
 # Install yggdrasil manually
-RUN apt-get update && apt-get install -y wget gnupg2 build-essential && \
+RUN apt-get update && apt-get install -y wget gnupg2 build-essential python3 python3-pip && \
+    pip3 install numpy && \
     wget https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.4/yggdrasil-0.5.4-linux-amd64.tar.gz && \
     tar -xvzf yggdrasil-0.5.4-linux-amd64.tar.gz && \
     cp yggdrasil /usr/local/bin/yggdrasil && chmod +x /usr/local/bin/yggdrasil
