@@ -20,12 +20,12 @@ RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install --upgrade pip && \
     /opt/venv/bin/pip install numpy
 
-# 🛰️ Install Yggdrasil v0.5.5 Manually
-RUN wget https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.5/yggdrasil-0.5.5-linux-amd64.tar.gz && \
-    tar -xvzf yggdrasil-0.5.5-linux-amd64.tar.gz && \
+# 🛰️ Install Yggdrasil v0.5.4 (working binary download available)
+RUN wget https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.4/yggdrasil-0.5.4-linux-amd64.tar.gz && \
+    tar -xvzf yggdrasil-0.5.4-linux-amd64.tar.gz && \
     cp yggdrasil /usr/local/bin/yggdrasil && \
     chmod +x /usr/local/bin/yggdrasil && \
-    rm -f yggdrasil-0.5.5-linux-amd64.tar.gz
+    rm -f yggdrasil-0.5.4-linux-amd64.tar.gz
 
 # 🛰️ Set Environment to Use Local Sovereign Python venv
 ENV PATH="/opt/venv/bin:$PATH"
