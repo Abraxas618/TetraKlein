@@ -1,141 +1,183 @@
-# 🚀 TetraKlein-Genesis-RTH-MeshReady User Deployment Guide
+# 🚀 TetraKlein Genesis Node Deployment User Guide
 
-**Project:** TetraKlein Genesis 
-**Version:** Sovereign Quantum-Resilient Infrastructure Release 1.0
-**Archive:** `TetraKlein-Genesis-RTH-MeshReady.tar.gz`
-By Michael Tass MacDonald (Abraxas618)
+**Project:** TetraKlein-Genesis-RTH-MeshReady  
+**Creator:** Michael Tass MacDonald (Abraxas618)  
+**IPFS Archive:** [bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4](https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4)  
+**GitHub Repository:** [Abraxas618/TetraKlein](https://github.com/Abraxas618/TetraKlein.git)
 
 ---
 
-# 🌐 Deployment Sources
+# Overview
+This guide explains **how to deploy** the TetraKlein Sovereign Quantum-Resilient Node on:
+- Ubuntu Linux
+- Debian Linux
+- Kali Linux
+- Fedora Linux
+- Arch Linux
+- Windows 10/11 (PowerShell + WSL2 recommended)
+- macOS (Intel and Apple Silicon)
 
-- **IPFS Archive:** [TetraKlein on IPFS](https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4)
-- **GitHub Repository:** [TetraKlein GitHub Clone](https://github.com/Abraxas618/TetraKlein)
+No matter the system, this manual ensures you can fully deploy your own **sovereign encrypted mesh node** + **hyperdimensional ledger genesis**.
 
-Clone Command:
+---
+
+# Pre-requisites
+
+| Requirement | Minimum Version | Notes |
+|:--|:--|:--|
+| Docker or Podman | Latest | Sovereign container deployment |
+| curl, wget, tar, gzip | Installed | Archive management |
+| git | Installed | Clone GitHub repo |
+| Python3 + pip3 | Installed | Required inside container |
+| Internet access (optional) | | Only needed for initial bootstrap |
+
+---
+
+# 1. Ubuntu / Debian / Kali Linux Instructions
+
 ```bash
+# 1. Update system
+sudo apt update && sudo apt upgrade -y
+
+# 2. Install dependencies
+sudo apt install -y docker.io curl wget tar gzip python3 python3-pip git
+
+# 3. Clone TetraKlein Genesis
 git clone https://github.com/Abraxas618/TetraKlein.git
-```
+cd TetraKlein
 
----
-
-# 📁 Contents of Archive
-
-- `Dockerfile`
-- `start.sh`
-- `run_zk_trust_proof.sh`
-- `Core/rth.py` (Recursive Tesseract Hashing)
-- `Mesh/yggdrasil.conf` (Hardened Mesh Configuration)
-- `ZK/zk_trust.circom`
-- `ZK/input.json`
-
-All files needed for full sovereign deployment.
-
----
-
-# 🔧 Universal Deployment Instructions
-
-## 💡 Requirements (All Systems)
-
-- Docker or Podman Installed (rootless preferred)
-- Ports `54545` open if peering publicly
-- Python3 + pip (for RTH inside container)
-
----
-
-# 🌍 Linux Deployment Instructions (Ubuntu, Kali, Debian, Fedora, Arch)
-
-### 1. Install Docker
-```bash
-sudo apt update
-sudo apt install docker.io -y
-sudo systemctl start docker
-sudo systemctl enable docker
-```
-OR Install Podman:
-```bash
-sudo apt install podman -y
-```
-
-### 2. Clone and Extract Project
-```bash
-mkdir -p ~/TetraKlein
-cd ~/TetraKlein
+# 4. (OR) Download from IPFS
 wget https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4 -O TetraKlein-Genesis-RTH-MeshReady.tar.gz
-tar -xvzf TetraKlein-Genesis-RTH-MeshReady.tar.gz
+
+# 5. Extract archive
+mkdir TetraKleinGenesis
+tar -xvzf TetraKlein-Genesis-RTH-MeshReady.tar.gz -C TetraKleinGenesis
+cd TetraKleinGenesis
+
+# 6. Build container (Docker)
+sudo docker build -t tetraklein-genesis .
+
+# 7. Run sovereign node
+sudo docker run --rm -it tetraklein-genesis
 ```
 
-OR Clone GitHub:
+---
+
+# 2. Fedora / Arch Linux Instructions
+
 ```bash
+# 1. Update system
+sudo dnf update -y   # (Fedora)
+sudo pacman -Syu     # (Arch)
+
+# 2. Install dependencies
+sudo dnf install -y docker curl wget tar gzip python3-pip git   # (Fedora)
+sudo pacman -S docker curl wget tar gzip python-pip git        # (Arch)
+
+# 3. Enable Docker
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# 4. Proceed same as Ubuntu
+# (Clone GitHub or IPFS download)
+...
+```
+
+---
+
+# 3. Windows 10/11 (PowerShell + WSL2 Recommended)
+
+### A. WSL2 Setup
+
+```powershell
+# 1. Enable WSL
+wsl --install
+
+# 2. Install Ubuntu from Microsoft Store
+# (Or use Debian, Fedora, Kali Linux)
+
+# 3. Open Ubuntu Terminal inside Windows
+
+# 4. Follow Ubuntu instructions from earlier
+```
+
+### B. Native PowerShell (Docker Desktop)
+
+```powershell
+# 1. Install Docker Desktop for Windows
+# https://www.docker.com/products/docker-desktop
+
+# 2. Open PowerShell as Administrator
+
+# 3. Clone repo
 git clone https://github.com/Abraxas618/TetraKlein.git
 cd TetraKlein
-```
 
-### 3. Build Docker Container
-```bash
+# 4. (OR) Download via curl
+curl -LO https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4
+Expand-Archive TetraKlein-Genesis-RTH-MeshReady.tar.gz -DestinationPath .
+
+# 5. Build and run
 docker build -t tetraklein-genesis .
+docker run --rm -it tetraklein-genesis
 ```
-
-### 4. Run Sovereign Node
-```bash
-docker run -it --rm --network host tetraklein-genesis
-```
-
-- `--network host` is important to expose mesh ports.
 
 ---
 
-# 💻 Windows Deployment Instructions (PowerShell)
+# 4. macOS (Intel or Apple Silicon)
 
-### 1. Install Docker Desktop
-- Download and install from: [Docker for Windows](https://www.docker.com/products/docker-desktop/)
-- Ensure "Use WSL2 Backend" is enabled.
+```bash
+# 1. Install Homebrew if missing
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-### 2. Open PowerShell (Admin) and Clone Project
-```powershell
-mkdir C:\TetraKlein
-cd C:\TetraKlein
-Invoke-WebRequest -Uri "https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4" -OutFile "TetraKlein-Genesis-RTH-MeshReady.tar.gz"
-Expand-Archive -LiteralPath TetraKlein-Genesis-RTH-MeshReady.tar.gz -DestinationPath .
-```
+# 2. Install dependencies
+brew install docker git python3
 
-OR Clone GitHub:
-```powershell
+# 3. Start Docker Desktop
+
+# 4. Clone and build
 git clone https://github.com/Abraxas618/TetraKlein.git
 cd TetraKlein
-```
 
-### 3. Build Docker Container
-```powershell
+# (OR IPFS download)
+...
+
+# 5. Build container
 docker build -t tetraklein-genesis .
-```
 
-### 4. Run Sovereign Node
-```powershell
-docker run -it --rm --network host tetraklein-genesis
+# 6. Run container
+docker run --rm -it tetraklein-genesis
 ```
-(If `--network host` causes issues on Windows, consider using a bridge network manually.)
 
 ---
 
-# 🛡️ Advanced Sovereign Tips
+# 5. After Deployment — Mesh + Proof Instructions
 
-- Change PrivateKey/PublicKey in `Mesh/yggdrasil.conf` before launching for unique node identity.
-- Set `BootstrapPeers` in `Mesh/yggdrasil.conf` if you want to connect to other sovereign nodes.
-- Use `Podman` instead of Docker if you require rootless containers.
-- Use `systemd` services for auto-starting the node on boot.
+- Yggdrasil encrypted Mesh auto-starts.
+- Sovereign IPv6 `tun0` interface will initialize.
+- zkSNARK RTH proof system will generate and validate Genesis.
+- Logs will display `Sovereign Mesh Online. Launching zkSNARK Proof Node...`
+
+✅ You are now inside **TetraKlein Sovereign Genesis Node**.
 
 ---
 
-# 🌟 Full Sovereign Lifecycle
+# Troubleshooting
 
-| Phase | Action |
+| Issue | Solution |
 |:--|:--|
-| Mesh Startup | Yggdrasil starts from hardened `Mesh/yggdrasil.conf`. |
-| Proof Cycle | `run_zk_trust_proof.sh` executes zkSNARK generation using Recursive Tesseract entropy. |
-| Ledger Genesis | Proofs anchored against Post-Quantum Hyperdimensional Ledger. |
-| Sovereign Expansion | Connect to other TetraKlein nodes via BootstrapPeers. |
+| Docker permission denied | `sudo usermod -aG docker $USER` then reboot |
+| IPFS download slow | Use `wget` with `--tries=10` or clone from GitHub |
+| Yggdrasil errors | Check `/opt/app/Mesh/yggdrasil.conf` for typos |
+| Proof fails | Ensure `Core/rth.py` and `run_zk_trust_proof.sh` exist |
 
 ---
 
- Michael Tass MacDonald (Abraxas618)  
+# 🌌 You Are Now Sovereign.
+
+Congratulations, Operator — you now have a:
+- Sovereign encrypted mesh
+- Hyperdimensional post-quantum proof node
+- Independence from all centralized systems
+
+Built by **Michael Tass MacDonald (Abraxas618)**.
