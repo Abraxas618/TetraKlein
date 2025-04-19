@@ -8,7 +8,10 @@ RUN npm install -g circom snarkjs
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg2 \
+    git \
+    make \
     build-essential \
+    golang-go \
     python3 \
     python3-venv \
     python3-pip \
@@ -20,12 +23,14 @@ RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install --upgrade pip && \
     /opt/venv/bin/pip install numpy
 
-# 🛰️ Install Yggdrasil v0.5.4 (working binary download available)
-RUN wget https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.4/yggdrasil-0.5.4-linux-amd64.tar.gz && \
-    tar -xvzf yggdrasil-0.5.4-linux-amd64.tar.gz && \
-    cp yggdrasil /usr/local/bin/yggdrasil && \
+# 🛰️ Clone and Build Yggdrasil v0.5.5 from Source
+RUN git clone https://github.com/yggdrasil-network/yggdrasil-go.git /opt/yggdrasil && \
+    cd /opt/yggdrasil && \
+    git checkout v0.5.5 && \
+    make && \
+    cp /opt/yggdrasil/yggdrasil /usr/local/bin/ && \
     chmod +x /usr/local/bin/yggdrasil && \
-    rm -f yggdrasil-0.5.4-linux-amd64.tar.gz
+    rm -rf /opt/yggdrasil
 
 # 🛰️ Set Environment to Use Local Sovereign Python venv
 ENV PATH="/opt/venv/bin:$PATH"
