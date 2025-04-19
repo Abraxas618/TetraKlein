@@ -47,8 +47,9 @@ WORKDIR /opt/app
 # 🛰️ Copy All Project Files
 COPY . .
 
-# 🛰️ Pre‑build zkSNARK circuit (correct path)
+# 🛰️ Compile zk‑SNARK circuit (Poseidon include path added)
 RUN circom ZK/zk_trust.circom --r1cs --wasm --sym -I ZK/circomlib/circuits
+
 
 
 # 🛰️ Sovereign Boot Command
