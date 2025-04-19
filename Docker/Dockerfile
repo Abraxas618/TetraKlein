@@ -1,11 +1,17 @@
-FROM python:3.11-slim
+# Use official lightweight node image
+FROM node:18-slim
 
-WORKDIR /app
+# Install circom and snarkjs
+RUN npm install -g circom snarkjs
 
-# Install Python dependencies
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Create app directory
+WORKDIR /opt/app
 
+# Copy all necessary project files
 COPY . .
 
-CMD ["python3", "examples/run_all.py"]
+# Build the proof environment
+RUN circom zk_trust.circom --r1cs --wasm --sym
+
+# Default command: Run proof generation script
+CMD ["bash", "run_zk_trust_proof.sh"]
