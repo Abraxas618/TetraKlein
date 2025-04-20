@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────
-# 🛰️  TetraKlein Genesis – Final Proven Hardened Dockerfile
+# 🛰️  TetraKlein Genesis – Final Future-Proof Hardened Dockerfile
 # ─────────────────────────────────────────────────────────────
 
 # 1️⃣ Base NodeJS slim image
@@ -36,13 +36,14 @@ RUN git clone https://github.com/yggdrasil-network/yggdrasil-go.git /opt/yggdras
     chmod +x /usr/local/bin/yggdrasil && \
     rm -rf /opt/yggdrasil
 
-# 7️⃣ App workspace
+# 7️⃣ Sovereign App Workspace
 WORKDIR /opt/app
+
+# 8️⃣ Copy Full Project
 COPY . .
 
-# 🛑 **NO SED PATCHING**  
-# 🛑 **NO circom pre-build at build time**  
-# 🛑 **NO compile.sh during build**
+# 9️⃣ 💎 Force Recopy Clean zk_trust.circom (Prevent Old Corruption)
+COPY ./ZK/zk_trust.circom ./ZK/zk_trust.circom
 
-# 🔟 Run-time final build using your working compile.sh
+# 🔟 Sovereign Runtime Genesis
 CMD ["bash", "-c", "cd ZK && chmod +x compile.sh && ./compile.sh && cd .. && bash start.sh"]
