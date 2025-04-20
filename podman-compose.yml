@@ -1,0 +1,31 @@
+# ─────────────────────────────────────────────────────────────
+# 🛰️  TetraKlein Genesis — podman-compose.yml
+# ─────────────────────────────────────────────────────────────
+
+version: "3.9"
+
+services:
+  tetraklein-genesis:
+    container_name: tetraklein-genesis
+    image: localhost/tetraklein-genesis:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      bash -c "
+      cd ZK &&
+      chmod +x compile.sh &&
+      ./compile.sh &&
+      cd .. &&
+      bash start.sh
+      "
+    working_dir: /opt/app
+    tty: true
+    stdin_open: true
+    restart: "no"
+    network_mode: "host"
+    volumes:
+      - ./ZK:/opt/app/ZK
+      - ./Core:/opt/app/Core
+    environment:
+      - SOVEREIGN_BOOTSTRAP=enabled
