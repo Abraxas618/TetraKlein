@@ -15,4 +15,3 @@ template Main() {
 }
 
 component main = Main();
-
