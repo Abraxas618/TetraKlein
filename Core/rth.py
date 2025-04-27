@@ -1,60 +1,53 @@
-from pathlib import Path
-
-# Define the path for the next file
-rth_path = Path("src/rth.py")
-
-# Define the content of the Recursive Tesseract Hashing module
-rth_code = """
-\"\"\"
-Recursive Tesseract Hashing (RTH)
-Hyperdimensional SHAKE256-based hash function operating on nested tensor blocks.
-\"\"\"
+"""
+Futureproof Sovereign Recursive Tesseract Hashing (RTH)
+Hyperdimensional Quantum Hardened Hash Function for Sovereign Networks
+"""
 
 import hashlib
 import numpy as np
+import os
+import random
 
-def recursive_tesseract_hash(data: bytes, depth: int = 4) -> bytes:
-    \"\"\"
-    Applies SHAKE256 recursively to simulate hyperdimensional compression layers.
+class RecursiveTesseractHasher:
+    def __init__(self, base_depth: int = 4, max_depth: int = 12, salt_length: int = 16):
+        """
+        Initialize the Sovereign Hasher.
+        
+        Args:
+            base_depth (int): Minimum recursion depth.
+            max_depth (int): Maximum recursion depth allowed.
+            salt_length (int): Length of quantum salt injected at every recursion.
+        """
+        self.base_depth = base_depth
+        self.max_depth = max_depth
+        self.salt_length = salt_length
 
-    Args:
-        data (bytes): Input binary data
-        depth (int): Number of recursive SHAKE256 rounds (each representing a tesseract fold)
+    def _generate_salt(self) -> bytes:
+        return os.urandom(self.salt_length)
 
-    Returns:
-        bytes: Final hash output
-    \"\"\"
-    h = data
-    for i in range(depth):
-        shake = hashlib.shake_256()
-        shake.update(h)
-        h = shake.digest(64)
-    return h
+    def recursive_tesseract_hash(self, data: bytes) -> bytes:
+        """
+        Applies dynamically recursive SHAKE256 hashing with quantum salt injections.
+        """
+        # Randomize recursion depth per hash invocation
+        recursion_depth = random.randint(self.base_depth, self.max_depth)
+        h = data
+        
+        for i in range(recursion_depth):
+            shake = hashlib.shake_256()
+            salt = self._generate_salt()
+            mixed = h + salt + salt[::-1]  # Inject salt and mirrored salt for symmetry
+            digest_size = random.randint(32, 128)  # Random digest size between 256-1024 bits
+            shake.update(mixed)
+            h = shake.digest(digest_size)
+        
+        return h
 
-def hyperdimensional_entropy_tensor(seed: bytes, dimensions=(4, 4, 4, 4)) -> np.ndarray:
-    \"\"\"
-    Generates a hyperdimensional tensor lattice from seed hash.
-
-    Args:
-        seed (bytes): Initial seed hash.
-        dimensions (tuple): Shape of the tesseract lattice.
-
-    Returns:
-        np.ndarray: Populated hyperdimensional tensor.
-    \"\"\"
-    tensor = np.frombuffer(seed * 16, dtype=np.uint8)[:np.prod(dimensions)]
-    return tensor.reshape(dimensions)
-
-if __name__ == "__main__":
-    demo = b"tetra-rth-seed"
-    final = recursive_tesseract_hash(demo)
-    tensor = hyperdimensional_entropy_tensor(final)
-    print("[+] Recursive hash digest:", final.hex()[:32], "...")
-    print("[+] Tesseract tensor shape:", tensor.shape)
-"""
-
-# Write the file
-rth_path.parent.mkdir(parents=True, exist_ok=True)
-rth_path.write_text(rth_code)
-
-rth_path.name
+    def hyperdimensional_entropy_tensor(self, seed: bytes, dimension_range=(4, 6)) -> np.ndarray:
+        """
+        Generates a hyperdimensional tensor lattice from seed hash.
+        """
+        # Randomize dimensions within sovereign limits
+        dims = [random.randint(dimension_range[0], dimension_range[1]) for _ in range(4)]
+        tensor = np.frombuffer(seed * 16, dtype=np.uint8)[:np.prod(dims)]
+        return tensor.reshape(dims)

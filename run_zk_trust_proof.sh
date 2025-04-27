@@ -17,6 +17,8 @@ VERIFICATION_KEY_JSON="verification_key.json"
 echo "🛰️ [0/9] Preprocessing entropy with Recursive Tesseract Hashing (RTH)..."
 
 python3 -c "
+import sys
+sys.path.append('/opt/app')
 from Core.rth import recursive_tesseract_hash
 with open('${INPUT_JSON}', 'rb') as f:
     seed = f.read()
@@ -28,7 +30,7 @@ with open('${RTH_OUTPUT}', 'wb') as out:
 echo "✅ RTH Digest created: ${RTH_OUTPUT}"
 
 echo "🛰️ [1/9] Compile circuit"
-circom ${CIRCUIT_NAME}.circom --r1cs --wasm --sym
+circom ZK/zk_trust.circom --r1cs --wasm --sym -I ZK/circomlib/circuits
 
 echo "🛰️ [2/9] Initialize Powers of Tau ceremony"
 snarkjs powersoftau new bn128 12 ${POT_0000} -v
