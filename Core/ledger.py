@@ -7,7 +7,7 @@ import hashlib
 import os
 import time
 
-class SovereignLedger:
+class Ledger:
     def __init__(self, epoch_size=1000):
         self.chain = []
         self.epoch_size = epoch_size  # Blocks per sovereign epoch
