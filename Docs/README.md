@@ -112,7 +112,7 @@ podman run -it tetraklein-genesis
 
 ## 📜 Documentation
 
-- [Deployment Manifest (coming soon)](Deployment_Manifest.md)
+- [Deployment Manifest](Deployment_Manifest.md)
 - [Audit Materials (coming soon)](Certification_Attachments/)
 
 ---
