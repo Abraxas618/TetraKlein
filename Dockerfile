@@ -16,6 +16,9 @@ RUN git clone https://github.com/iden3/circom.git /opt/circom && \
     cargo build --release && \
     cp target/release/circom /usr/local/bin/
 
+# Install snarkjs globally (needed for trusted setup)
+RUN npm install -g snarkjs
+
 # Correct Go Install
 RUN wget https://golang.org/dl/go1.20.5.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.20.5.linux-amd64.tar.gz && \
