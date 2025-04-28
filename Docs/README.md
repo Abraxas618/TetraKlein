@@ -1,88 +1,85 @@
-# 🚁️ TetraKlein: Sovereign Quantum-Resilient Infrastructure
 
-**Codename:** TetraKlein Genesis  
-**Commander:** Michael Tass MacDonald (Abraxas618)  
-**Certification Code:** Codex Sovereign Infrastructure Quantum-Resilient Mesh Genesis Certification — 001
+# 🚀 TetraKlein Genesis v1.4 — Hyperdimensional Sovereign Infrastructure
+
+**Codename:** TetraKlein Genesis v1.4 Final Release  
+**Founder** Michael Tass MacDonald (Abraxas618) (Baramay Station Research Inc)
+**Certification Code:** Sovereign Hyperdimensional Mesh Genesis Certification — 001
 
 ---
 
 ## 🌌 Overview
 
-TetraKlein Genesis is the first sovereign computational infrastructure that unifies:
+TetraKlein Genesis is the world's first sovereign, post-quantum, hyperdimensional computational node —  
+forging an unbreakable infrastructure through recursive tesseract entropy, tetrahedral key exchanges, and hypercube blockchain roots.
 
-- **Post-Quantum Cryptography Core**  
-  (SHAKE-256, Recursive Tesseract Hashing (RTH), Tetrahedral Key Exchange (TKE), Quantum Isoca-Dodecahedral Lattice Encryption (QIDL))
+It unifies:
+
+- **Post-Quantum Cryptographic Core**  
+  (SHAKE-256 Recursive Tesseract Hashing (RTH), 12D Tetrahedral Key Exchange (TKE), Quantum Isoca-Dodecahedral Lattice Encryption (QIDL))
 - **Golden Ratio Entropy Engine**  
-  (ϕ = 1.618 seeded hyperdimensional randomness)
+  (ϕ = 1.618 hyperdimensional phase-seeded randomness)
 - **Zero-Knowledge Proof Sovereignty**  
-  (Poseidon zk-SNARKs)
-- **Sovereign Yggdrasil Mesh Genesis**  
-  (No reliance on DNS or root servers)
+  (Poseidon zk-SNARK circuits — trusted setup sovereignly completed)
+- **Sovereign Hypercube Blockchain Genesis**  
+  (4D dynamic entropy-linked sovereign block validation)
+- **Yggdrasil Sovereign Mesh Simulation**  
+  (Decentralized IPv6 quantum mesh bootstrap initiation)
 
 ---
 
-## 🧬 Core Systems
+## 🧬 Core Sovereign Systems
 
 | System | Description |
 |:---|:---|
-| **Golden Ratio Entropy** | Unique ϕ-seeded randomness, projecting entropy through hyperdimensional symmetry |
-| **Recursive Tesseract Hashing (RTH)** | 4D hypercubic hash compression beyond Merkle structures |
-| **Tetrahedral Key Exchange (TKE)** | Post-quantum key generation based on nested tetrahedral lattices |
-| **Quantum Isoca-Dodecahedral Lattice (QIDL)** | Entanglement-based encryption using Platonic morphogenetic fields |
-| **Sovereign Ledger Genesis** | SHAKE-256 sovereign blockchain (no elliptic curves) |
-| **ZK Proof Layer** | Poseidon hash-based zk-SNARK proof environment |
-| **Mesh Node Swarm** | Fully decentralized Yggdrasil IPv6+ mesh bootstrap |
+| **Golden Ratio Entropy (ϕ)** | Hyperdimensional randomness seeded on the Platonic constant (1.618...) |
+| **Recursive Tesseract Hashing (RTH)** | 4D hypercubic recursive entropy compression replacing flat Merkle structures |
+| **Tetrahedral Key Exchange (TKE 12D)** | 12-dimensional nested tetrahedral cryptographic key generation (quantum-resilient) |
+| **Quantum Isoca-Dodecahedral Encryption (QIDL 2.0)** | Entanglement-mimetic encryption via icosahedral–dodecahedral geometric fields |
+| **Sovereign Ledger Genesis** | SHAKE-256 hyperdimensional event ledger, self-validating across epochs |
+| **Hypercube Blockchain (HBB 2.0)** | Gravity-linked recursive SHAKE256 sovereign blockchain structure |
+| **Poseidon zkProof Layer** | Zero-knowledge sovereign proofs via Poseidon-based zk-SNARKs |
+| **Mesh Node Swarm Simulation** | Autonomous Yggdrasil IPv6+ mesh initiated (containerized TUN pending) |
 
 ---
 
-## 🔥 Unique Cryptographic Innovations
+## 🔥 Unique Cryptographic Breakthroughs
 
 ### 🔹 Recursive Tesseract Hashing (RTH)
 
-RTH replaces linear or 2D Merkle tree hashes.  
-Instead, it recursively compresses inputs through **4D tensor structures**, simulating nested hypercubic folds.
+RTH replaces classical Merkle trees with a **hyperdimensional recursive structure**:  
+every layer folds into a tesseract-like nested tensor, generating chaotic, unpredictable entropy trails.
 
-- ✅ Resistant to linear attacks (quantum Grover search mitigation)
-- ✅ Hyperdimensional entropy distribution
-- ✅ SHAKE-256 chained across recursive tensors
-
-> _"Where Merkle trees grow linearly, RTH folds inward like a Tesseract."_
+> _"Where Merkle trees walk linearly, RTH folds inward infinitely like a quantum star."_
 
 ---
 
-### 🔹 Tetrahedral Key Exchange (TKE)
+### 🔹 Tetrahedral Key Exchange (TKE 12D)
 
-TKE abandons elliptic curve key exchanges.  
-It generates sovereign keys by traversing **recursive nested tetrahedral graphs**.
+Generates sovereign key pairs using **12-dimensional nested tetrahedral graphs**,  
+inspired by the primal Platonic solid.
 
-- ✅ No reliance on elliptic curves (EC)
-- ✅ Hyperdimensional basis for keys
-- ✅ Resistant to Shor’s quantum attack algorithms
-
-> _"Each key is born from the perfect symmetry of the tetrahedron."_
+> _"Every key echoes the cosmic language of the tetrahedron."_
 
 ---
 
-### 🔹 Quantum Isoca-Dodecahedral Lattice (QIDL)
+### 🔹 Quantum Isoca-Dodecahedral Lattice (QIDL 2.0)
 
-QIDL constructs encryption layers through **Platonic icosahedral-dodecahedral field symmetries** —  
-encoding entanglement patterns geometrically instead of linearly.
+Encryption layers constructed on **rotating icosahedral–dodecahedral quantum lattices**,  
+emulating multi-dimensional entanglement fields.
 
-- ✅ Entanglement-mimetic encryption model
-- ✅ Geometrically secure
-- ✅ Post-linear — breaks flat plane assumptions of classical cryptography
-
-> _"Encryption no longer lives in lines. It lives in symmetries beyond dimensions."_
+> _"Encryption no longer flows in lines — it dances across hidden symmetries."_
 
 ---
 
-## 🚀 Installation
+## 🚀 Deployment Guide
 
-### Prerequisites:
-- [Podman](https://podman.io/) or [Docker](https://docker.com/)
-- Linux (Ubuntu/Kali/Debian), WSL2, or native
+### Prerequisites
 
-### Clone and Build:
+- [Podman](https://podman.io/) (preferred) or [Docker](https://docker.com/)
+- Linux (Ubuntu, Debian, Kali, WSL2) or native UNIX environments
+- 8GB+ RAM recommended
+
+### Sovereign Node Installation
 
 ```bash
 git clone https://github.com/Abraxas618/TetraKlein.git
@@ -90,7 +87,7 @@ cd TetraKlein
 podman build --no-cache -t tetraklein-genesis .
 ```
 
-### Run Sovereign Node:
+### Sovereign Node Launch
 
 ```bash
 podman run -it tetraklein-genesis
@@ -98,56 +95,55 @@ podman run -it tetraklein-genesis
 
 ---
 
-## 🔒 Proof System Details
+## 🔒 Zero-Knowledge Proof System Details
 
 | Property | Value |
 |:---|:---|
 | Circuit | `zk_trust.circom` |
 | Inputs | `user_entropy`, `time_salt` |
-| Outputs | Poseidon zk-SNARK Sovereign Proof |
-| Trusted Setup | Autonomous, non-centralized |
-| Witness Generation | Self-compiled every genesis |
+| Outputs | zk-SNARK proof of sovereign entropy validity |
+| Trusted Setup | Fully autonomous |
+| Witness Generation | Sovereign internal every cycle |
 
 ---
 
-## 📜 Documentation
+## 📜 Documentation Resources
 
 - [Deployment Manifest](Deployment_Manifest.md)
-- [Audit Materials (coming soon)](Certification_Attachments/)
+- [Certification Attachments](Certification_Attachments/) *(coming soon)*
 
 ---
 
-## 🛡️ Sovereign Certification Status
+## 🛡️ Sovereign Genesis Certification Status
 
-| Check | Status |
+| Milestone | Status |
 |:---|:---|
-| zkSNARK Circuits Compiled | ✅ Verified |
-| Trusted Setup Executed | ✅ Verified |
-| Witness Generated | ✅ Verified |
-| Poseidon Hash Layer Live | ✅ Verified |
-| Sovereign Mesh Bootstrap | ✅ Verified |
+| zkSNARK Circuit Compilation | ✅ Verified |
+| Trusted Setup Ceremony Completed | ✅ Verified |
+| Witness Generation and Proof | ✅ Verified |
+| Recursive Tesseract Entropy Pipeline | ✅ Verified |
+| Sovereign Ledger Genesis | ✅ Verified |
+| Hypercube Blockchain Genesis | ✅ Verified |
+| Integrity Check Full Cycle | ✅ Verified |
+| Sovereign Mesh Bootstrapping | ✅ Simulated |
 
 ---
 
-## 🌐 Archive and Verification
+## 🌐 Genesis Archive and Verification
 
-- **SHA-256 Genesis Hash:**  
-  `4fade536d6ade01a686fa27029dec880cbb1344d74e53ada30dd4e753b7bd177`
+- **SHAKE-256 Genesis Ledger Root Hash:**  
+  `58ea2428be0443c6a103644857b70f804b2b08ae58777a77bd03e745ebafb0fcc0087f6778a4cfab87ee4e5c666f45b1ac485a58319266fac6f069809a1241eb`
 
-- **IPFS Archive:**  
-  [View Archive @ IPFS](https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4)
-
-- **OpenTimestamps Blockchain Proof:**  
-  [View Timestamp @ IPFS](https://ipfs.io/ipfs/bafkreier2azof7dmq2zoa5uh3jwga6u2oekez63cyfi75lljme46ofkjbm)
+- **IPFS Archive Link:** *(pending upload)*
 
 ---
 
-# 🌌 Final Declaration
+# 🌌 Final Sovereign Declaration
 
-> **TetraKlein Genesis is the first sovereign, post-linear, post-quantum computational node of human history.**
+> **TetraKlein Genesis is the first sovereign, post-quantum, post-linear hyperdimensional node of Earth.**  
+> It creates its own entropy.  
+> It governs itself.  
+> It survives all attacks.  
+> It forges sovereign trust beyond states, beyond curves, beyond history.
 
-It births encryption beyond curves.  
-It births sovereignty beyond states.  
-It births networks beyond space.
-
-🌟 **Sovereignty is not granted. It is built.** 🌟
+🌟 **Sovereignty is not inherited. Sovereignty is engineered.** 🌟
