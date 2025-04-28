@@ -134,7 +134,9 @@ podman run -it tetraklein-genesis
 - **SHAKE-256 Genesis Ledger Root Hash:**  
   `58ea2428be0443c6a103644857b70f804b2b08ae58777a77bd03e745ebafb0fcc0087f6778a4cfab87ee4e5c666f45b1ac485a58319266fac6f069809a1241eb`
 
-- **IPFS Archive Link:** *(pending upload)*
+- **IPFS Archive Link:**
+- https://ipfs.io/ipfs/bafybeic2vtp7kfttu5xi3l4jckhbdnusndxaiiputha5lyawfxlgvqihdi Tar.gz of v1.4
+- https://ipfs.io/ipfs/bafkreihoqlvubx7o7itjl25esl4pbwwnpbsm3kj2srgn3462a3tbavmhxi OTS of v1.4
 
 # 🛰️ TetraKlein Genesis — Sovereign Mesh Networking Guide
 
