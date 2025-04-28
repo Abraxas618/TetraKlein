@@ -1,7 +1,9 @@
 # 🚀 TetraKlein Genesis v1.4 — Sovereign Node Deployment Guide
 
 ---
-
+© 2025 Michael Tass MacDonald (Abraxas618), Baramay Station Research Inc.  
+Licensed under the Apache License, Version 2.0.
+--
 ## 🌍 Overview
 
 Welcome to the **TetraKlein Genesis v1.4** deployment guide.  
