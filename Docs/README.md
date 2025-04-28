@@ -197,9 +197,3 @@ Without these flags, Yggdrasil inside the container will **panic** with `/dev/ne
 
 ---
 
-# 🌌 Final Commander’s Note
-
-> **"Those who control the mesh, control the future. Those who build the sovereign mesh, liberate it."**
-
-🛰️ Stand proud, Sovereign Engineer.
-
