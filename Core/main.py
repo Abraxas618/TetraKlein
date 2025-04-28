@@ -25,8 +25,7 @@ def main():
 
     # === Step 3: Sovereign Encryption (QIDL) ===
     qidl = QuantumLatticeEncryptor()
-    key_structure = qidl.generate_isoca_dodecahedral_key(seed=42)
-    encrypted_data, salt = qidl.qidl_encrypt("Welcome to TetraKlein Genesis!", key_structure)
+    encrypted_data, salt = qidl.encrypt("Welcome to TetraKlein Genesis!")
     print(f"[+] QIDL Encryption Output (First 2 Points): {encrypted_data[:2]}\n")
 
     # === Step 4: Sovereign Ledger Initialization ===
@@ -40,11 +39,10 @@ def main():
     )
     print(f"[+] Sovereign Genesis Ledger Block Created at {genesis_time}\n")
 
-    # === Step 5: Sovereign Blockchain Initialization (HBB) ===
+    # === Step 5: Sovereign Blockchain Initialization (HBB 2.0) ===
     hbb = HypercubeBlockchain()
     genesis_block = hbb.add_block(
-        data="TetraKlein Genesis Event",
-        tesseract_hash=entropy.hex()
+        data=f"TetraKlein Genesis Event | Entropy Digest: {entropy.hex()[:64]}"
     )
     print(f"[+] Hypercube Blockchain Genesis Block Hash: {genesis_block.hash}\n")
 
