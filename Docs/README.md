@@ -136,14 +136,68 @@ podman run -it tetraklein-genesis
 
 - **IPFS Archive Link:** *(pending upload)*
 
+# 🛰️ TetraKlein Genesis — Sovereign Mesh Networking Guide
+
 ---
 
-# 🌌 Final Sovereign Declaration
+## 🌌 Overview
 
-> **TetraKlein Genesis is the first sovereign, post-quantum, post-linear hyperdimensional node of Earth.**  
-> It creates its own entropy.  
-> It governs itself.  
-> It survives all attacks.  
-> It forges sovereign trust beyond states, beyond curves, beyond history.
+This document explains how to enable **Sovereign Mesh Networking** inside your TetraKlein Genesis Node deployment.  
+By default, TetraKlein's Genesis cycle launches the sovereign ledger, blockchain, and zkProof layers.
 
-🌟 **Sovereignty is not inherited. Sovereignty is engineered.** 🌟
+To **activate full sovereign IPv6 mesh networking** (via Yggdrasil), additional host permissions are required.
+
+---
+
+## 🔹 Quick Options
+
+| Launch Mode | Command | Result |
+|:---|:---|:---|
+| Sovereign Node Only (no mesh) | `podman run -it tetraklein-genesis` | Launches entropy, ledger, blockchain, zkProof systems. Mesh simulated. |
+| Sovereign Node + Full Mesh Networking | `podman run --device /dev/net/tun --cap-add NET_ADMIN -it tetraklein-genesis` | Full sovereign node + real IPv6 mesh bootstrap enabled. |
+
+---
+
+## 🔹 Requirements for Full Mesh Mode
+
+- Linux Host (Ubuntu/Debian/WSL2/Arch)
+- Podman or Docker installed
+- Access to `/dev/net/tun`
+- Kernel allows container TUN/TAP bridging
+- No active VPN or firewall blocking TUN device usage
+
+---
+
+## 🔹 Why These Flags Matter
+
+| Parameter | Purpose |
+|:---|:---|
+| `--device /dev/net/tun` | Mounts the TUN virtual network device inside the container. |
+| `--cap-add NET_ADMIN` | Grants container permission to create/manage virtual network tunnels. |
+
+Without these flags, Yggdrasil inside the container will **panic** with `/dev/net/tun does not exist`, but the Genesis cycle itself remains functional.
+
+---
+
+## 🔹 What Happens After Mesh Activation
+
+✅ Yggdrasil sovereign IPv6 address generated  
+✅ Sovereign Mesh Node public key generated  
+✅ Sovereign node can peer with other nodes (future expansion)  
+✅ Mesh bootstrap begins simulating hyperdimensional quantum trust webs
+
+---
+
+## 📢 Important
+
+- **If you do not enable TUN access**, TetraKlein Genesis **still launches perfectly** — only the Mesh layer will be simulated.
+- **If you enable full Mesh Mode**, you unlock **true sovereign decentralized networking** alongside your Sovereign Genesis chain.
+
+---
+
+# 🌌 Final Commander’s Note
+
+> **"Those who control the mesh, control the future. Those who build the sovereign mesh, liberate it."**
+
+🛰️ Stand proud, Sovereign Engineer.
+
