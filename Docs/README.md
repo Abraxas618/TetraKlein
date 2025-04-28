@@ -4,7 +4,9 @@
 **Codename:** TetraKlein Genesis v1.4 Final Release  
 **Founder** Michael Tass MacDonald (Abraxas618) (Baramay Station Research Inc)
 **Certification Code:** Sovereign Hyperdimensional Mesh Genesis Certification — 001
-
+---
+© 2025 Michael Tass MacDonald (Abraxas618), Baramay Station Research Inc.  
+Licensed under the Apache License, Version 2.0.
 ---
 
 ## 🌌 Overview
