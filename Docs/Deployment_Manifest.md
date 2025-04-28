@@ -1,174 +1,194 @@
-# 🚀 TetraKlein Sovereign Node Deployment: Full User Guide
+# 🚀 TetraKlein Genesis v1.4 — Sovereign Node Deployment Guide
 
 ---
 
 ## 🌍 Overview
 
-Welcome to the **TetraKlein Genesis** sovereign quantum-resilient node deployment guide.
-This guide explains step-by-step **how to download, verify, extract, and deploy** the TetraKlein Sovereign Node on:
+Welcome to the **TetraKlein Genesis v1.4** deployment guide.  
+This guide shows how to **download, verify, extract, build, and launch** your **Sovereign Quantum-Resilient Node** across major platforms:
 
-- 🔧 **Ubuntu Linux**
-- 🔧 **Debian Linux**
-- 🔧 **Kali Linux**
-- 🔧 **Other Linux Distros**
-- 🔧 **Windows PowerShell** (with WSL/Native)
-- 🔧 **MacOS Terminal**
+- Ubuntu Linux / Debian Linux / Kali Linux
+- Windows 10/11 (with WSL)
+- macOS
+- Other UNIX-like systems
 
-**No matter your OS, this guide ensures you can deploy TetraKlein successfully.**
+> **TetraKlein Sovereign Nodes** implement:  
+> Recursive Tesseract Hashing (RTH), 12D Tetrahedral Key Exchange (TKE), Quantum Isoca-Dodecahedral Encryption (QIDL), zkSNARK Proof Systems, and Sovereign Hypercube Blockchain.
 
 ---
 
-## 🌐 Downloading TetraKlein Archive
+## 🌐 Downloading TetraKlein Genesis Archive
 
-### Download via IPFS
+### 📅 IPFS Archive
 
 Primary IPFS Archive:
-```
-https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4
-```
-
-You can manually download from browser or install **IPFS Desktop** / **command-line ipfs** client.
-
-Example IPFS CLI Download:
 ```bash
-ipfs get bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4 -o TetraKlein-Genesis-RTH-MeshReady.tar.gz
+https://ipfs.io/ipfs/bafybeic2vtp7kfttu5xi3l4jckhbdnusndxaiiputha5lyawfxlgvqihdi
 ```
 
-### Download via GitHub (Alternative)
+Use **browser download** or **IPFS CLI**:
 ```bash
-git clone https://github.com/Abraxas618/TetraKlein.git
-```
-
-Note: **Official Archive Name Before Upload:**
-```
-TetraKlein-Genesis-RTH-MeshReady.tar.gz
+ipfs get bafybeic2vtp7kfttu5xi3l4jckhbdnusndxaiiputha5lyawfxlgvqihdi -o TetraKlein-Genesis-v1.4.tar.gz
 ```
 
 ---
 
-## 🔒 Verify Archive Integrity
+### 📅 GitHub Clone
 
-SHA-256 checksum should match:
+```bash
+git clone https://github.com/Abraxas618/TetraKlein.git
+cd TetraKlein
 ```
-4fade536d6ade01a686fa27029dec880cbb1344d74e53ada30dd4e753b7bd177
+
+---
+
+## 🔒 Verifying Archive Integrity
+
+SHA-256 checksum (official):
+```
+b9dc97a6e4cbf2e02b6bb830897d1b92b8362a2ff5b38e7c9628e4970ed24511
 ```
 
 #### Linux/macOS Terminal
 ```bash
-sha256sum TetraKlein-Genesis-RTH-MeshReady.tar.gz
+sha256sum TetraKlein-Genesis-v1.4.tar.gz
 ```
 
 #### Windows PowerShell
 ```powershell
-Get-FileHash TetraKlein-Genesis-RTH-MeshReady.tar.gz -Algorithm SHA256
+Get-FileHash TetraKlein-Genesis-v1.4.tar.gz -Algorithm SHA256
 ```
 
-**Match hashes before proceeding!**
+✅ Ensure your checksum **matches** before extracting!
 
 ---
 
-## 🔢 Extract the Archive
+## 📉 Extracting the Archive
 
 #### Linux/macOS Terminal
 ```bash
-tar -xvzf TetraKlein-Genesis-RTH-MeshReady.tar.gz
+tar -xvzf TetraKlein-Genesis-v1.4.tar.gz
 ```
 
-#### Windows PowerShell (with 7zip or WSL)
+#### Windows PowerShell (with WSL or 7zip)
 ```powershell
-7z x TetraKlein-Genesis-RTH-MeshReady.tar.gz
-```
-_or if using WSL:_
-```bash
-tar -xvzf TetraKlein-Genesis-RTH-MeshReady.tar.gz
+7z x TetraKlein-Genesis-v1.4.tar.gz
 ```
 
-Result: You should now have a folder structure:
+Resulting Folder Structure:
 ```
-TetraKlein-main/
-├── Core/
-├── Mesh/
-├── ZK/
-├── start.sh
-├── Dockerfile
-└── run_zk_trust_proof.sh
+TetraKlein/
+🔹 Core/
+🔹 Mesh/
+🔹 ZK/
+🔹 start.sh
+🔹 Dockerfile
+🔹 podman-compose.yml
+🔹 run_zk_trust_proof.sh
 ```
 
 ---
 
-## 🎓 Install Required Software
+## 🎓 Installing Required Software
 
-#### Ubuntu/Debian/Kali Linux
+#### Ubuntu/Debian/Kali
 ```bash
 sudo apt update
-sudo apt install -y docker.io docker-compose python3 python3-pip npm nodejs build-essential wget
-sudo systemctl start docker
-sudo systemctl enable docker
+sudo apt install -y podman podman-compose python3 python3-pip npm nodejs build-essential wget
 ```
 
-#### macOS (with Homebrew)
+#### macOS (Homebrew)
 ```bash
-brew install docker npm python3
+brew install podman npm python3
+brew install podman-compose
 ```
-(Ensure Docker Desktop is installed for macOS)
 
-#### Windows PowerShell (with WSL Ubuntu)
+#### Windows (WSL Ubuntu)
 ```powershell
 wsl
 sudo apt update
-sudo apt install -y docker.io docker-compose python3 python3-pip npm nodejs build-essential wget
-sudo service docker start
+sudo apt install -y podman podman-compose python3 python3-pip npm nodejs build-essential wget
+```
+
+✅ Start Podman service if necessary:
+```bash
+systemctl --user start podman
 ```
 
 ---
 
-## 🛠️ Building the TetraKlein Sovereign Container
+## 🛠️ Building the Sovereign Node Container
 
-From inside the extracted `TetraKlein-main/` directory:
+Inside `TetraKlein/` folder:
 
 ```bash
-sudo docker build -t tetraklein-genesis .
+podman build --no-cache -t tetraklein-genesis .
 ```
 
-This will:
-- Install Circom and SnarkJS
-- Install Yggdrasil binary
-- Build zkSNARK circuits
-- Prepare Mesh encrypted networking layer
-
-✅ You will now have the `tetraklein-genesis` container ready.
+✅ This will:
+- Install Circom, SnarkJS
+- Prepare zkSNARK circuits
+- Install Yggdrasil IPv6 mesh tools
+- Build Mesh networking simulation layer
+- Prepare Recursive Tesseract Hash entropy engine
 
 ---
 
-## 🔄 Running the Sovereign Genesis Node
+## 🔄 Launching Your TetraKlein Genesis Node
 
+### Option 1: Sovereign Node + Simulated Mesh (default)
 ```bash
-sudo docker run -it --network host tetraklein-genesis
+podman run -it tetraklein-genesis
 ```
 
-This will automatically:
-- 📡 Bootstrap Yggdrasil Mesh Sovereign Node
-- 🧰 Generate zkSNARKs with Recursive Tesseract Hashing (RTH)
-- 🔢 Produce Proofs anchoring hyperdimensional ledgers
+✅ Starts full Genesis Proof Cycle, creates ledger, proof, and blockchain.
 
-✅ Your TetraKlein Sovereign Node is now live!
+---
+
+### Option 2: Sovereign Node + Full Yggdrasil Mesh (if TUN support exists)
+```bash
+podman run --device /dev/net/tun --cap-add NET_ADMIN -it tetraklein-genesis
+```
+> ⚡ Requires TUN/TAP device access on host (Linux only)
+
+✅ This will generate a live sovereign IPv6 Yggdrasil Mesh Node!
+
+---
+
+## 📜 Genesis Events Executed
+
+Upon launch:
+- zkSNARK Circuit Compiled (Groth16)
+- Trusted Setup Ceremony completed
+- Witness generated
+- Sovereign zkProof created
+- Recursive Tesseract Hash generated
+- Sovereign Hypercube Ledger Genesis Block anchored
+- Optional Yggdrasil Mesh Identity generated
 
 ---
 
 ## 💡 Troubleshooting Tips
 
 | Problem | Solution |
-|:--|:--|
-| Docker build fails | Make sure system memory >4GB and disk space >5GB |
-| Yggdrasil won't start | Check if ports 54545 are open; check `Mesh/yggdrasil.conf` file |
-| Proof generation fails | Ensure Node.js, Circom, SnarkJS installed inside container |
-| WSL Docker issues (Windows) | Start WSL manually: `wsl --update`, `wsl` then `service docker start` |
+|:---|:---|
+| Podman build fails | Ensure RAM > 4GB and Disk Space > 5GB |
+| Missing TUN device | Launch in simulation mode (`podman run -it tetraklein-genesis`) |
+| Proof generation errors | Reinstall NodeJS and npm inside container |
+| WSL Docker issues (Windows) | Restart WSL: `wsl --shutdown`, `wsl`, then `systemctl start podman` |
 
 ---
 
 ## 💚 Support the Sovereign Mesh!
 
 - ⭐ GitHub: [https://github.com/Abraxas618/TetraKlein](https://github.com/Abraxas618/TetraKlein)
-- 📦 Archive: [IPFS Archive Link](https://ipfs.io/ipfs/bafkreicpvxstnvvn4angq35coau55seazoytitlu4u5numg5jz2tw66ro4)
+- 🌐 Medium Genesis Article: [TetraKlein Genesis v1.4 Announcement](https://medium.com/@tassalphonse/tetraklein-genesis-v1-4-the-dawn-of-hyperdimensional-sovereign-infrastructure-ad55ebca7025)
+- 📆 IPFS Archive: [bafybeic2vtp7kfttu5xi3l4jckhbdnusndxaiiputha5lyawfxlgvqihdi](https://ipfs.io/ipfs/bafybeic2vtp7kfttu5xi3l4jckhbdnusndxaiiputha5lyawfxlgvqihdi)
 
-Together we build a sovereign hyperdimensional future!
+---
+
+🌟  
+**Together we are building the Hyperdimensional Sovereign Civilization of the Future.**  
+🌟
+
+# 🚀 Long Live TetraKlein Genesis v1.4 — The Dawn of Sovereign Infrastructure.
