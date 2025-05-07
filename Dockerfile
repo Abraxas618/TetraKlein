@@ -32,10 +32,10 @@ RUN git clone https://github.com/iden3/circom.git /opt/circom && \
 RUN npm install -g snarkjs@0.7.5
 
 
-# 7️⃣ Setup Python venv and install numpy
+# 7️⃣ Setup Python venv and install dependencies
 RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install --upgrade pip && \
-    /opt/venv/bin/pip install numpy
+    /opt/venv/bin/pip install numpy pynacl
 ENV PATH="/opt/venv/bin:$PATH"
 
 # 8️⃣ Clone and Build Yggdrasil v0.5.5 (no change)
@@ -53,6 +53,7 @@ RUN mkdir -p /etc/yggdrasil && \
 
 # 🔟 Set working directory for app
 WORKDIR /opt/app
+RUN mkdir -p /data
 
 # 1️⃣1️⃣ Copy full project into container
 COPY . .

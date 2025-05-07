@@ -1,68 +1,74 @@
-"""
-Quantum Isoca-Dodecahedral Encryption (QIDL 2.0)
-"""
-
-import numpy as np
-import time
 import os
 import hashlib
-import random
+import json
+import base64
+import time
+from typing import Tuple
+from datetime import datetime
+from hashlib import shake_256
+
 
 class QuantumLatticeEncryptor:
-    def __init__(self, seed: int = 42):
-        self.key = self.generate_isoca_dodecahedral_key(seed)
+    def __init__(self, seed: bytes = None):
+        if seed is None:
+            self.seed = os.urandom(32)
+        else:
+            self.seed = seed
+        self.key = self._generate_key(self.seed)
 
-    @staticmethod
-    def generate_isoca_dodecahedral_key(seed: int = 42):
-        np.random.seed(seed)
-        phi = (1 + np.sqrt(5)) / 2
-        angles = np.linspace(0, 2 * np.pi, 20)
-        key = np.array([np.cos(phi * angles), np.sin(phi * angles)]).T
-        return key
+    def _generate_key(self, seed: bytes) -> bytes:
+        shake = shake_256()
+        shake.update(seed)
+        return shake.digest(64)  # 512-bit key
 
-    @staticmethod
-    def generate_entropy_salt(length: int = 32) -> str:
-        entropy_base = os.urandom(length) + str(time.time_ns()).encode()
-        return hashlib.sha256(entropy_base).hexdigest()[:length]
+    def encrypt(self, message: str) -> Tuple[str, str]:
+        message_bytes = message.encode('utf-8')
+        ciphertext = bytes([b ^ self.key[i % len(self.key)] for i, b in enumerate(message_bytes)])
+        encoded = base64.b64encode(ciphertext).decode('utf-8')
+        return encoded, base64.b64encode(self.seed).decode('utf-8')
 
-    def encrypt(self, message: str, salt: str = None):
-        if salt is None:
-            salt = self.generate_entropy_salt()
+    def decrypt(self, encoded_ciphertext: str, seed_b64: str) -> str:
+        seed = base64.b64decode(seed_b64.encode('utf-8'))
+        key = self._generate_key(seed)
+        ciphertext = base64.b64decode(encoded_ciphertext.encode('utf-8'))
+        plaintext_bytes = bytes([b ^ key[i % len(key)] for i, b in enumerate(ciphertext)])
+        return plaintext_bytes.decode('utf-8')
 
-        message += salt
 
-        drift_vector = np.random.normal(0, 0.001, size=self.key.shape)  # Small chaotic drift
-        encoded = []
-        timestamp_phase = (time.time_ns() % 1_000_000) / 1_000_000  # Phase based on time
+# === Example usage and ledger input generation ===
 
-        for i, char in enumerate(message):
-            char_val = ord(char)
-            point = self.key[i % len(self.key)] + drift_vector[i % len(drift_vector)]
-            # Nonlinear projection
-            transformed = (
-                (char_val * point[0] * np.sin(timestamp_phase + point[1])),
-                (char_val * point[1] * np.cos(timestamp_phase + point[0]))
-            )
-            encoded.append(transformed)
+message = "Hyperdimensional signal from node α."
+encryptor = QuantumLatticeEncryptor()
+ciphertext, encoded_seed = encryptor.encrypt(message)
 
-        return encoded, salt
+# Safe relative paths
+input_path = "input.json"
+ledger_path = "zk_qidl_ledger_entry.json"
 
-    def decrypt(self, encoded_message, salt: str = ''):
-        decoded = ''
-        try:
-            drift_vector = np.zeros_like(self.key)  # Assume no drift for basic decryption
-            timestamp_phase = (time.time_ns() % 1_000_000) / 1_000_000  # Approximate phase
-            for i, (x, y) in enumerate(encoded_message):
-                point = self.key[i % len(self.key)] + drift_vector[i % len(drift_vector)]
-                denom = (point[0] * np.sin(timestamp_phase + point[1])) + (point[1] * np.cos(timestamp_phase + point[0]))
-                if denom == 0:
-                    raise ZeroDivisionError("Quantum lattice inversion failed")
-                char_val = round((x + y) / denom)
-                decoded += chr(int(char_val) % 256)
-        except (ZeroDivisionError, ValueError, IndexError) as e:
-            print(f"[!] Decryption error: {e}")
-            return None
+user_entropy = int.from_bytes(os.urandom(8), byteorder='big')
+time_salt = int(time.time())
 
-        if salt and decoded.endswith(salt):
-            decoded = decoded[:-len(salt)]
-        return decoded
+zk_input = {
+    "user_entropy": user_entropy,
+    "time_salt": time_salt
+}
+
+with open(input_path, "w") as f:
+    json.dump(zk_input, f, indent=4)
+
+ledger_entry = {
+    "timestamp": datetime.utcnow().isoformat() + "Z",
+    "ciphertext": ciphertext,
+    "entropy_seed": encoded_seed,
+    "zk_origin": True
+}
+
+with open(ledger_path, "w") as f:
+    json.dump(ledger_entry, f, indent=4)
+
+# Optional DataFrame display (comment out if not using inside notebook)
+try:
+    import ace_tools as tools
+    tools.display_dataframe_to_user(name="ZK-QIDL Ledger Entry", dataframe=[ledger_entry])
+except:
+    pass  # Safe fallback for environments without ace_tools
