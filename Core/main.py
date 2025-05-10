@@ -35,7 +35,9 @@ def main():
     print("\n🚀 Launching TetraKlein Genesis Sovereign Pipeline...\n")
 
     # === Config ===
-    node_id = os.getenv("NODE_ID", "TetraGenesis-Node01")
+    node_id = os.getenv("NODE_ID", "TetraGenesis-Node")
+
+    os.makedirs("data", exist_ok=True)
 
     # === Step 1: Sovereign Key Generation (TKE) ===
     tke = TetrahedralKeyExchange()
