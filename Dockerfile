@@ -1,69 +1,88 @@
 # ───────────────────────────────────────────────────────────
-# 🛰️ TetraKlein Genesis Node - Sovereign Hardened Dockerfile v2.0
+# TetraKlein Genesis Node – Hardened Sovereign Dockerfile v2.1
+# Clean, deterministic, reproducible, build-stable
 # ───────────────────────────────────────────────────────────
 
-# 1️⃣ Pull latest Node.js 20.x base
 FROM node:20-slim
 
-# 2️⃣ Install system dependencies
+# ------------------------------------------------------------
+# 1. System Dependencies
+# ------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
-    wget git build-essential curl libgmp-dev ca-certificates \
-    python3 python3-venv python3-pip golang \
+    git wget curl build-essential python3 python3-pip python3-venv \
+    golang libgmp-dev ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-# 3️⃣ Install Rust toolchain (for Circom build)
+# ------------------------------------------------------------
+# 2. Rust Toolchain (for Circom build)
+# ------------------------------------------------------------
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# 4️⃣ Install Go 1.22.2 (latest stable)
+# ------------------------------------------------------------
+# 3. Go 1.22.2 (Yggdrasil dependency)
+# ------------------------------------------------------------
 RUN wget https://golang.org/dl/go1.22.2.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.22.2.linux-amd64.tar.gz && \
     rm go1.22.2.linux-amd64.tar.gz
 ENV PATH="/usr/local/go/bin:${PATH}"
 
-# 5️⃣ Clone and Build Circom 2.1.9
+# ------------------------------------------------------------
+# 4. Build Circom 2.1.9
+# ------------------------------------------------------------
 RUN git clone https://github.com/iden3/circom.git /opt/circom && \
-    cd /opt/circom && \
-    git checkout v2.1.9 && \
+    cd /opt/circom && git checkout v2.1.9 && \
     cargo build --release && \
-    cp target/release/circom /usr/local/bin/
+    cp target/release/circom /usr/local/bin && \
+    rm -rf /opt/circom
 
-# 6️⃣ Install snarkjs 0.7.5 globally
+# ------------------------------------------------------------
+# 5. Install snarkjs
+# ------------------------------------------------------------
 RUN npm install -g snarkjs@0.7.5
 
-
-# 7️⃣ Setup Python venv and install dependencies
+# ------------------------------------------------------------
+# 6. Python Virtual Environment + Dependencies
+# ------------------------------------------------------------
 RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install --upgrade pip && \
     /opt/venv/bin/pip install numpy pynacl
-ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/opt/venv/bin:${PATH}"
 
-# 8️⃣ Clone and Build Yggdrasil v0.5.5 (no change)
-RUN git clone https://github.com/yggdrasil-network/yggdrasil-go.git /opt/yggdrasil && \
-    cd /opt/yggdrasil && \
-    git checkout v0.5.5 && \
+# ------------------------------------------------------------
+# 7. Build Yggdrasil v0.5.5
+# ------------------------------------------------------------
+RUN git clone https://github.com/yggdrasil-network/yggdrasil-go.git /opt/ygg && \
+    cd /opt/ygg && git checkout v0.5.5 && \
     go build -o yggdrasil ./cmd/yggdrasil && \
-    cp yggdrasil /usr/local/bin/ && \
+    mv yggdrasil /usr/local/bin && \
     chmod +x /usr/local/bin/yggdrasil && \
-    rm -rf /opt/yggdrasil
+    rm -rf /opt/ygg
 
-# 9️⃣ Generate a fresh Yggdrasil configuration
+# ------------------------------------------------------------
+# 8. Generate Default Yggdrasil Configuration
+# ------------------------------------------------------------
 RUN mkdir -p /etc/yggdrasil && \
     yggdrasil -genconf > /etc/yggdrasil/yggdrasil.conf
 
-# 🔟 Set working directory for app
+# ------------------------------------------------------------
+# 9. App Directory
+# ------------------------------------------------------------
 WORKDIR /opt/app
 RUN mkdir -p /data
 
-# 1️⃣1️⃣ Copy full project into container
+# ------------------------------------------------------------
+# 10. Copy Entire TetraKlein Project
+# ------------------------------------------------------------
 COPY . .
 
-# 1️⃣2️⃣ Ensure zk_proof runner is executable
-COPY ./run_zk_trust_proof.sh ./run_zk_trust_proof.sh
-RUN chmod +x run_zk_trust_proof.sh
+# ------------------------------------------------------------
+# 11. Permissions Fix
+# ------------------------------------------------------------
+RUN chmod +x start.sh && \
+    chmod +x run_zk_trust_proof.sh
 
-# 1️⃣3️⃣ Force overwrite clean zk_trust.circom
-COPY ./ZK/zk_trust.circom ./ZK/zk_trust.circom
-
-# 1️⃣4️⃣ Sovereign Runtime Command
-CMD ["bash", "-c", "cd ZK && chmod +x compile.sh && ./compile.sh && cd .. && bash start.sh"]
+# ------------------------------------------------------------
+# 12. Deterministic Entrypoint
+# ------------------------------------------------------------
+CMD ["bash", "start.sh"]
