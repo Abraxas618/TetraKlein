@@ -1,6 +1,6 @@
 """
 TetraKlein Genesis Node Launcher
-Assembles Sovereign Hyperdimensional Genesis Cycle
+Assembles Hyperdimensional Genesis Cycle
 """
 
 import time
@@ -32,32 +32,32 @@ def get_yggdrasil_ipv6():
 
 
 def main():
-    print("\n🚀 Launching TetraKlein Genesis Sovereign Pipeline...\n")
+    print("\n🚀 Launching TetraKlein Genesis Pipeline...\n")
 
     # === Config ===
     node_id = os.getenv("NODE_ID", "TetraGenesis-Node")
 
     os.makedirs("data", exist_ok=True)
 
-    # === Step 1: Sovereign Key Generation (TKE) ===
+    # === Step 1: Key Generation (TKE) ===
     tke = TetrahedralKeyExchange()
     A = tke.generate_public_matrix()
     sk = tke.generate_private_key()
     public_key = tke.generate_public_key(A, sk)
     print(f"[🔐] TKE Public Key (12D vector):\n{public_key}\n")
 
-    # === Step 2: Sovereign Entropy Folding (RTH) ===
+    # === Step 2: Entropy Folding (RTH) ===
     rth = RecursiveTesseractHasher()
     entropy = rth.recursive_tesseract_hash(public_key.tobytes())
     entropy_hex = entropy.hex()
     print(f"[🌐] Recursive Tesseract Entropy Digest (SHAKE256): {entropy_hex[:64]}...\n")
 
-    # === Step 3: Sovereign Quantum Encryption (QIDL) ===
+    # === Step 3: Quantum Encryption (QIDL) ===
     qidl = QuantumLatticeEncryptor()
     encrypted_data, salt = qidl.encrypt("Welcome to TetraKlein Genesis!")
     print(f"[🧬] QIDL Encrypted Lattice (preview): {encrypted_data[:2]}\n")
 
-    # === Step 4: Sovereign Ledger Initialization ===
+    # === Step 4: Ledger Initialization ===
     ledger = Ledger(chain_file="data/ledger_chain.json", node_id=node_id)
     genesis_time = int(time.time())
     ledger.add_block(
@@ -65,10 +65,10 @@ def main():
         zk_origin=True,
         timestamp=genesis_time
     )
-    print(f"[📜] Sovereign Ledger Genesis Block at UNIX time: {genesis_time}\n")
+    print(f"[📜] Ledger Genesis Block at UNIX time: {genesis_time}\n")
     ledger.save_chain()
 
-    # === Step 5: Sovereign Hypercube Blockchain (HBB 2.0) ===
+    # === Step 5: Hypercube Blockchain (HBB 2.0) ===
     hbb = HypercubeBlockchain()
     genesis_block = hbb.add_block(
         data=f"TetraKlein Genesis Event | Entropy Digest: {entropy_hex[:64]}"
@@ -77,11 +77,11 @@ def main():
 
     # === Step 6: Integrity Verification ===
     if ledger.verify_chain() and hbb.is_valid():
-        print("\n✅ Sovereign Genesis Chain Integrity Verified.\n")
+        print("\n✅ Genesis Chain Integrity Verified.\n")
     else:
         print("\n❌ Chain Verification Failed — Check Ledger/Blockchain Logs.\n")
 
-    # === Step 7: Start Sovereign Mesh Sync Listener ===
+    # === Step 7: Start Mesh Sync Listener ===
     mesh = MeshNode(node_id)
     mesh.start_listener()
 
