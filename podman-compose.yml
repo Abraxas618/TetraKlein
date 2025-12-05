@@ -28,4 +28,4 @@ services:
       - ./ZK:/opt/app/ZK
       - ./Core:/opt/app/Core
     environment:
-      - SOVEREIGN_BOOTSTRAP=enabled
+      - TEST_BOOTSTRAP=enabled
