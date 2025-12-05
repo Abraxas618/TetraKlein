@@ -72,7 +72,7 @@ Post-Quantum Ready ZKP Pipelines
 🧠 Contributors
 Michael Tass MacDonald (Abraxas618)
 Independent ZK Architect | Codex Constitution Author
-✉️ tassalphonse@gmail.com
+
 
 📖 License
 Apache 2.0 / MIT Dual License
