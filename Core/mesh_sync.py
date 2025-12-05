@@ -1,6 +1,6 @@
 """
 TetraKlein Mesh Sync Engine
-Secure Inter-Node Ledger Broadcasting & Sovereign zkBeacon Handshakes
+Secure Inter-Node Ledger Broadcasting & zkBeacon Handshakes
 """
 
 import json
