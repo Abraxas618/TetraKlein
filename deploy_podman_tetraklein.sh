@@ -11,7 +11,7 @@ if ! command -v podman >/dev/null 2>&1; then
     exit 1
 fi
 
-echo "🛰️ Ensuring sovereign data volume exists..."
+echo "🛰️ Ensuring data volume exists..."
 podman volume exists ${VOLUME_NAME} || podman volume create ${VOLUME_NAME}
 
 echo "🛰️ Removing old container (if exists)..."
@@ -20,10 +20,10 @@ if podman ps -a --format "{{.Names}}" | grep -q "^${CONTAINER_NAME}$"; then
     podman rm ${CONTAINER_NAME} || true
 fi
 
-echo "🛰️ Building sovereign TetraKlein image..."
+echo "🛰️ Building TetraKlein image..."
 podman build -t ${IMAGE_NAME} .
 
-echo "🛰️ Launching Sovereign TetraKlein Node..."
+echo "🛰️ Launching TetraKlein Node..."
 # Attempt TUN-enabled launch, fall back silently if unsupported
 if [ -c /dev/net/tun ]; then
     echo "🛰️ TUN device detected — enabling full mesh mode."
