@@ -1,6 +1,6 @@
 """
 TetraKlein zkBeacon Node Trust Broadcaster
-Broadcasts zkSNARK proof to neighboring sovereign mesh nodes
+Broadcasts zkSNARK proof to neighboring  mesh nodes
 """
 
 import json
