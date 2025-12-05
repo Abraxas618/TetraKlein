@@ -1,4 +1,4 @@
-# 🚀 TetraKlein Genesis v1.4 — Sovereign Node Deployment Guide
+# 🚀 TetraKlein Genesis v1.4 —  Node Deployment Guide
 
 ---
 © 2025 Michael Tass MacDonald (Abraxas618), Baramay Station Research Inc.  
@@ -7,15 +7,15 @@ Licensed under the Apache License, Version 2.0.
 ## 🌍 Overview
 
 Welcome to the **TetraKlein Genesis v1.4** deployment guide.  
-This guide shows how to **download, verify, extract, build, and launch** your **Sovereign Quantum-Resilient Node** across major platforms:
+This guide shows how to **download, verify, extract, build, and launch** your ** Quantum-Resilient Node** across major platforms:
 
 - Ubuntu Linux / Debian Linux / Kali Linux
 - Windows 10/11 (with WSL)
 - macOS
 - Other UNIX-like systems
 
-> **TetraKlein Sovereign Nodes** implement:  
-> Recursive Tesseract Hashing (RTH), 12D Tetrahedral Key Exchange (TKE), Quantum Isoca-Dodecahedral Encryption (QIDL), zkSNARK Proof Systems, and Sovereign Hypercube Blockchain.
+> **TetraKlein  Nodes** implement:  
+> Recursive Tesseract Hashing (RTH), 12D Tetrahedral Key Exchange (TKE), Quantum Isoca-Dodecahedral Encryption (QIDL), zkSNARK Proof Systems, and  Hypercube Blockchain.
 
 ---
 
@@ -119,7 +119,7 @@ systemctl --user start podman
 
 ---
 
-## 🛠️ Building the Sovereign Node Container
+## 🛠️ Building the  Node Container
 
 Inside `TetraKlein/` folder:
 
@@ -138,7 +138,7 @@ podman build --no-cache -t tetraklein-genesis .
 
 ## 🔄 Launching Your TetraKlein Genesis Node
 
-### Option 1: Sovereign Node + Simulated Mesh (default)
+### Option 1:  Node + Simulated Mesh (default)
 ```bash
 podman run -it tetraklein-genesis
 ```
@@ -147,13 +147,13 @@ podman run -it tetraklein-genesis
 
 ---
 
-### Option 2: Sovereign Node + Full Yggdrasil Mesh (if TUN support exists)
+### Option 2:  Node + Full Yggdrasil Mesh (if TUN support exists)
 ```bash
 podman run --device /dev/net/tun --cap-add NET_ADMIN -it tetraklein-genesis
 ```
 > ⚡ Requires TUN/TAP device access on host (Linux only)
 
-✅ This will generate a live sovereign IPv6 Yggdrasil Mesh Node!
+✅ This will generate a live  IPv6 Yggdrasil Mesh Node!
 
 ---
 
@@ -163,9 +163,9 @@ Upon launch:
 - zkSNARK Circuit Compiled (Groth16)
 - Trusted Setup Ceremony completed
 - Witness generated
-- Sovereign zkProof created
+-  zkProof created
 - Recursive Tesseract Hash generated
-- Sovereign Hypercube Ledger Genesis Block anchored
+-  Hypercube Ledger Genesis Block anchored
 - Optional Yggdrasil Mesh Identity generated
 
 ---
@@ -181,16 +181,16 @@ Upon launch:
 
 ---
 
-## 💚 Support the Sovereign Mesh!
+## 💚 Support the  Mesh!
 
 - ⭐ GitHub: [https://github.com/Abraxas618/TetraKlein](https://github.com/Abraxas618/TetraKlein)
-- 🌐 Medium Genesis Article: [TetraKlein Genesis v1.4 Announcement](https://medium.com/@tassalphonse/tetraklein-genesis-v1-4-the-dawn-of-hyperdimensional-sovereign-infrastructure-ad55ebca7025)
+- 🌐 Medium Genesis Article: [TetraKlein Genesis v1.4 Announcement](https://medium.com/@tassalphonse/tetraklein-genesis-v1-4-the-dawn-of-hyperdimensional--infrastructure-ad55ebca7025)
 - 📆 IPFS Archive: [bafybeic2vtp7kfttu5xi3l4jckhbdnusndxaiiputha5lyawfxlgvqihdi](https://ipfs.io/ipfs/bafybeic2vtp7kfttu5xi3l4jckhbdnusndxaiiputha5lyawfxlgvqihdi)
 
 ---
 
 🌟  
-**Together we are building the Hyperdimensional Sovereign Civilization of the Future.**  
+**Together we are building the Hyperdimensional  Civilization of the Future.**  
 🌟
 
-# 🚀 Long Live TetraKlein Genesis v1.4 — The Dawn of Sovereign Infrastructure.
+# 🚀 Long Live TetraKlein Genesis v1.4 — The Dawn of  Infrastructure.
