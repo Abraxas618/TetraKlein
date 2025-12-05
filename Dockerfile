@@ -1,5 +1,5 @@
 # ───────────────────────────────────────────────────────────
-# TetraKlein Genesis Node – Hardened Sovereign Dockerfile v2.1
+# TetraKlein Genesis Node – Dockerfile v2.2
 # Clean, deterministic, reproducible, build-stable
 # ───────────────────────────────────────────────────────────
 
