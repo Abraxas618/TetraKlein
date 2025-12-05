@@ -1,6 +1,6 @@
 """
 Recursive Tesseract Hashing (RTH) v2.0
-Hyperdimensional Post-Quantum Hashing for Sovereign Systems
+Hyperdimensional Post-Quantum Hashing
 """
 
 import hashlib
