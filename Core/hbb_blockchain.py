@@ -1,5 +1,5 @@
 """
-Futureproof Sovereign Hypercube-Based Blockchain (HBB 2.1)
+Futureproof Hypercube-Based Blockchain (HBB 2.1)
 SHAKE256 Hyperdimensional Gravity-Linked Blockchain with ZK Anchoring
 """
 
@@ -16,7 +16,7 @@ class HyperBlock:
         self.data = data
         self.previous_hash = previous_hash
         self.tesseract_hash = tesseract_hash
-        self.entropy = entropy  # Sovereign entropy field
+        self.entropy = entropy  # Entropy field
         self.zk_origin = zk_origin  # ZK-anchored flag
         self.hash = self.compute_hash()
 
@@ -33,15 +33,15 @@ class HyperBlock:
         return hashlib.shake_256(block_string).hexdigest(64)
 
 class HypercubeBlockchain:
-    def __init__(self, sovereign_seeds=None):
+    def __init__(self, test_seeds=None):
         self.chains = []
-        self.sovereign_seeds = sovereign_seeds if sovereign_seeds else [os.urandom(32).hex()]
+        self.test_seeds = test_seeds if test_seeds else [os.urandom(32).hex()]
         self.create_genesis_blocks()
 
     def create_genesis_blocks(self):
-        for seed in self.sovereign_seeds:
+        for seed in self.test_seeds:
             entropy = os.urandom(16)
-            root_block = HyperBlock(0, time.time(), f"Sovereign Genesis Seed {seed}", "0", "0", entropy)
+            root_block = HyperBlock(0, time.time(), f"Genesis Seed {seed}", "0", "0", entropy)
             self.chains.append([root_block])
 
     def _select_active_chain(self):
@@ -66,7 +66,7 @@ class HypercubeBlockchain:
 
     def is_valid(self):
         """
-        Validate all sovereign chains
+        Validate all chains
         """
         for chain in self.chains:
             for i in range(1, len(chain)):
@@ -75,7 +75,7 @@ class HypercubeBlockchain:
                 if curr.hash != curr.compute_hash() or curr.previous_hash != prev.hash:
                     print(f"[❌ Chain Break in chain {self.chains.index(chain)} at Block {i}]")
                     return False
-        print("[✅ All Sovereign Chains Verified]")
+        print("[✅ All Chains Verified]")
         return True
 
     def save_to_file(self, path: str):
